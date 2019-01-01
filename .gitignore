@@ -39,3 +39,7 @@ target/*
 # svn
 .svn/
 .svn/*
+
+# out
+out/
+out/*
