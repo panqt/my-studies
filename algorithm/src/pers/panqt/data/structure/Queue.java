@@ -46,4 +46,11 @@ public class Queue {
         arr = newArr;
         return retValue;
     }
+
+    public boolean isNotEmpty(){
+        if(arr.length==0){
+            return false;
+        }
+        return true;
+    }
 }

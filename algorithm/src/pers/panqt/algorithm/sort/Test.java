@@ -22,9 +22,15 @@ public class Test {
         int[] arr2 = Arrays.copyOf(arr,arr.length);
         int[] arr3 = Arrays.copyOf(arr,arr.length);
         int[] arr4 = Arrays.copyOf(arr,arr.length);
+        int[] arr5 = Arrays.copyOf(arr,arr.length);
+        int[] arr6 = Arrays.copyOf(arr,arr.length);
+        int[] arr7 = Arrays.copyOf(arr,arr.length);
         BubbleSort.bubbleSort(arr1);
         QuickSort.quickSort(arr2,0,arr.length-1);
         InsertSort.insertSort(arr3);
         ShellSort.shellSort(arr4);
+        SelectSort.selectSort(arr5);
+        MergeSort.mergeSort(arr6);
+        RadixSort.radixSort(arr7);
     }
 }
