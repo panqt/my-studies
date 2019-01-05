@@ -1,4 +1,4 @@
-package pers.panqt.data.structure;
+package pers.panqt.data.structure.link;
 
 /**
  *  @time       2019年01月02日	6:48
