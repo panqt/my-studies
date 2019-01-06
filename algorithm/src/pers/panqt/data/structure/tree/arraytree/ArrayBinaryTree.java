@@ -1,4 +1,4 @@
-package pers.panqt.data.structure.tree.ordertree;
+package pers.panqt.data.structure.tree.arraytree;
 
 /**
  *  @time       2019年01月05日	19:27

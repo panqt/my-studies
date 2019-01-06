@@ -11,12 +11,12 @@ import java.util.Arrays;
 public class QuickSort {
     public static void main(String[] args) {
         int[] arr = new int[]{5,1,7,8,9,2,0,3,4,6};
-        arr = quickSort(arr,0,arr.length-1);
+        arr = quickSort(arr);
         System.out.println(Arrays.toString(arr));
     }
-    public static int[] quickSort(int[] arr,int start,int end){
+    public static int[] quickSort(int[] arr){
         long l1 = System.currentTimeMillis();
-        arr = sort(arr,start,end);
+        arr = sort(arr,0,arr.length-1);
         long l2 = System.currentTimeMillis();
         System.out.println("快速排序时间："+(l2-l1));
         return arr;

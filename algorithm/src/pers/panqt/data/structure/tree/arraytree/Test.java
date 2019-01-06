@@ -1,4 +1,4 @@
-package pers.panqt.data.structure.tree.ordertree;
+package pers.panqt.data.structure.tree.arraytree;
 
 /**
  *  @time       2019年01月05日	19:17
@@ -6,9 +6,9 @@ package pers.panqt.data.structure.tree.ordertree;
  *	@author     panqt
  *	@comment    顺序存储二叉树
  *
- *  第n个元素左子节点：2n+1
- *          右子节点：2n+2
- *          父节点：(n-1)/2
+ *  第n个(从0开始)元素左子节点：2n+1
+ *                  右子节点：2n+2
+ *                  父节点：(n-1)/2
  */
 public class Test {
     public static void main(String[] args) {
