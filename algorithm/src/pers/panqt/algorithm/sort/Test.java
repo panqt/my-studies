@@ -13,9 +13,9 @@ public class Test {
     public static void main(String[] args) {
         Random random = new Random();
 
-        int[] arr = new int[100000];
+        int[] arr = new int[1000];
         for (int i=0;i<arr.length;i++){
-            arr[i] = random.nextInt(2000000);
+            arr[i] = random.nextInt(2000);
         }
         int[] arr0 = Arrays.copyOf(arr,arr.length);
         int[] arr1 = Arrays.copyOf(arr,arr.length);
