@@ -55,4 +55,8 @@ public class Stack {
     public int peek(){
         return arr[arr.length-1];
     }
+
+    public boolean isNotEmpty(){
+        return arr.length==0?false:true;
+    }
 }
