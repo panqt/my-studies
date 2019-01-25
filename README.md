@@ -1,15 +1,15 @@
 # study-notes  学习笔记
 
-### algorithm 
+### algorithm 算法
 
-### framework
+### framework 框架
 
 > springboot
 
-### middleware
+### middleware 中间件
 
-### design-pattern
+### design-pattern 设计模式
 
-### database
+### database 数据库
 
-### nosql
+### nosql 缓存
