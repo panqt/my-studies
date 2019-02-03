@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.panqt.springboot.mybatis.UserMapper">
+
+    <select id="findById" resultType="pers.panqt.springboot.entry.User">
+        SELECT * FROM user WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO user(user_id, user_name, create_time, department_id, role_id) VALUES (#{userId}, #{userName}, #{createTime}, #{departmentId}, #{roleId})
+    </insert>
+
+</mapper>

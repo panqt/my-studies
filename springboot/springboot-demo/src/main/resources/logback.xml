@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="LOGGER_NAME" value="springboot-demo-logger" />
+    <property name="LOGGER_HOME" value="D:/WorkSpace/Logs" />
+    <contextName>${LOGGER_NAME}</contextName>
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%logger : %line] %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%logger : %line] %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGGER_HOME}/${LOGGER_NAME}_%d{yyyyMMdd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>64 MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.apache.ibatis.io.VFS" level="ERROR"/>
+    <logger name="org.apache.ibatis.io.JBoss6VFS" level="ERROR"/>
+    <logger name="org.apache.ibatis.io.DefaultVFS" level="ERROR"/>
+    <logger name="org.apache.ibatis.io.ResolverUtil" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.AbstractConnector" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.HttpInput" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.HttpConnection" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.HttpChannel" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.session" level="ERROR"/>
+    <logger name="org.eclipse.jetty.util" level="ERROR"/>
+    <logger name="org.eclipse.jetty.http" level="ERROR"/>
+    <logger name="org.eclipse.jetty.servlet" level="ERROR"/>
+    <logger name="org.eclipse.jetty.io" level="ERROR"/>
+    <logger name="org.apache.zookeeper" level="ERROR"/>
+    <logger name="org.I0Itec.zkclient" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.remoting" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.config" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.monitor" level="FATAL"/>
+    <logger name="org.springframework.beans.factory.support" level="ERROR"/>
+    <logger name="org.springframework.web.servlet.handler" level="ERROR"/>
+    <logger name="org.springframework.context.annotation" level="ERROR"/>
+    <logger name="org.springframework.core.io.support" level="ERROR"/>
+    <logger name="org.apache.kafka" level="ERROR"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>
