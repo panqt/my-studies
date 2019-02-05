@@ -52,7 +52,9 @@
     <logger name="org.springframework.core.io.support" level="ERROR"/>
     <logger name="org.apache.kafka" level="ERROR"/>
 
-    <root level="DEBUG">
+    <logger name="pers.panqt.springboot" level="debug"/>
+
+    <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE" />
     </root>
