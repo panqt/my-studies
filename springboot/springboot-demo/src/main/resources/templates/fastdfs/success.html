@@ -1,0 +1,32 @@
+<!--
+ ~  time:   2019年03月14日	4:17
+ ~  author: panqt
+ ~
+ ~  comment:
+ -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8" />
+    <title>fileUpload page</title>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+文件上传成功 ！！！
+<img th:src="${image.visitUrl}" style="width: 200px;height: 200px">
+
+${image.visitUrl}
+<table >
+    <tr>
+        <td>"${map.kkk}"</td>
+        <td>"${kkk}"</td>
+        <td>"${haha}"</td>
+        <td>th:image="*{visitUrl}"</td>
+        <td>th:value="${image.visitUrl}"</td>
+    </tr>
+</table>
+<span th:text="${image.visitUrl}"></span>
+</body>
+</html>

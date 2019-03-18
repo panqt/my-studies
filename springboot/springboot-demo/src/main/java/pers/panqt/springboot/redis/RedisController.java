@@ -1,10 +1,7 @@
 package pers.panqt.springboot.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pers.panqt.springboot.entry.User;
 import pers.panqt.springboot.mybatis.UserMapper;
 
@@ -15,6 +12,7 @@ import pers.panqt.springboot.mybatis.UserMapper;
  *	@comment    
  */
 @RestController
+@RequestMapping("redis")
 public class RedisController {
 
     @Autowired
@@ -23,15 +21,15 @@ public class RedisController {
     @Autowired
     UserMapper userMapper;
 
-    @PostMapping("setRedis/{id}")
-    public String setRedis(@PathVariable("id") String id){
-        User user = userMapper.findById(Integer.valueOf(id));
+    @PostMapping("set/{id}")
+    public String set(@PathVariable("id") String id){
+        User user = userMapper.selectById(Integer.valueOf(id));
         redisService.setValue(id,user);
         return "";
     }
 
-    @GetMapping("getRedis/{id}")
-    public Object getRedis(@PathVariable("id") String id){
+    @GetMapping("get/{id}")
+    public Object get(@PathVariable("id") String id){
         return redisService.getValue(id);
     }
 }

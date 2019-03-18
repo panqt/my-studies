@@ -1,7 +1,10 @@
 package pers.panqt.springboot.mybatis;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 import pers.panqt.springboot.entry.User;
+
+import java.util.List;
 
 /**
  *  @time       2019年02月01日	21:55
@@ -10,9 +13,16 @@ import pers.panqt.springboot.entry.User;
  *	@comment    
  */
 @Mapper
+@Repository
 public interface UserMapper {
 
-    public User findById(int userId);
+    public User selectById(int userId);
 
-    public void insert(User user);
+    public List<User> selectList(User user);
+
+    public int insert(User user);
+
+    public int update(User user);
+
+    public int delete(int userId);
 }

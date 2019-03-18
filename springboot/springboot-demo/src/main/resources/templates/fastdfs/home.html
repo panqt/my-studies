@@ -1,0 +1,40 @@
+<!--
+ ~  time:   2019年03月14日	4:16
+ ~  author: panqt
+ ~
+ ~  comment:
+ -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8" />
+    <title>fileUpload page</title>
+    <script src="/jquery1.8.3.js"></script>
+    <script src="/common"></script>
+    <script src="/fastfds.js"></script>
+</head>
+<body>
+<div style="float:left">
+
+        <h1 th:inlines="text">文件上传</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="fileName" /><br>
+            <input id="on-submit" type="button" value="提交" />
+        </form>
+        <img src="" height="200" width="200">
+</div>
+
+<div style="float:left">
+
+中
+</div>
+
+<div style="float:left">
+
+右
+
+</div>
+</body>
+</html>

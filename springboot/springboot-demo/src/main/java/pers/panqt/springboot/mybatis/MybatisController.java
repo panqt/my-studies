@@ -10,9 +10,11 @@ import pers.panqt.springboot.entry.User;
  *  @time       2019年02月01日	22:23
  *	@author     panqt
  *
- *	@comment    
+ *	@see pers.panqt.springboot.SpringbootDemoApplication
+ *       扫描mybatis mapper接口	@MapperScan("pers.panqt.springboot.mybatis")
  */
 @RestController
+@RequestMapping("mybatis")
 public class MybatisController {
 
     Logger logger = LoggerFactory.getLogger(MybatisController.class);
@@ -20,14 +22,14 @@ public class MybatisController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping("mybatis-insert")
+    @PostMapping("insert")
     public void insert(@RequestBody User user){
         userMapper.insert(user);
     }
 
-    @GetMapping("mybatis-find/{id}")
+    @GetMapping("find/{id}")
     public User find(@PathVariable("id") int id){
-        User user = userMapper.findById(id);
+        User user = userMapper.selectById(id);
         logger.debug("============> 查询{}",id);
         return user;
     }

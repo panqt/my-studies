@@ -18,8 +18,8 @@ public class MailController {
     @Autowired
     JavaMailSenderImpl mailSender;
 
-    @GetMapping("mail")
-    public String mail(){
+    @GetMapping("send-mail")
+    public String sendMail(){
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setSubject("Hello World");

@@ -3,12 +3,78 @@
 
 <mapper namespace="pers.panqt.springboot.mybatis.UserMapper">
 
-    <select id="findById" resultType="pers.panqt.springboot.entry.User">
-        SELECT * FROM user WHERE user_id = #{userId}
+    <resultMap id="UserResultMap" type="pers.panqt.springboot.entry.User" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="table_name">
+		USER
+	</sql>
+
+    <sql id="Column_List" >
+      user_id,user_name,create_time,department_id,role_id
+    </sql>
+
+    <sql id="select_conditon">
+        where 1 = 1
+        <if test="userId != null  and userId != ''"> AND user_id = #{userId, jdbcType=INTEGER} </if>
+        <if test="userName != null  and userName != ''"> AND user_name = #{userName, jdbcType=VARCHAR}</if>
+        <if test="createTime != null "> AND create_time = #{createTime, jdbcType=TIMESTAMP}</if>
+        <if test="departmentId != null  and departmentId != ''"> AND department_id = #{departmentId, jdbcType=INTEGER}</if>
+        <if test="roleId != null  and roleId != ''"> AND role_id = #{roleId, jdbcType=INTEGER}</if>
+    </sql>
+
+    <select id="selectById" resultMap="UserResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Column_List" />
+        FROM
+        <include refid="table_name" />
+        WHERE user_id = #{userId}
     </select>
 
-    <insert id="insert">
-        INSERT INTO user(user_id, user_name, create_time, department_id, role_id) VALUES (#{userId}, #{userName}, #{createTime}, #{departmentId}, #{roleId})
+    <select id="selectList" resultMap="UserResultMap" parameterType="pers.panqt.springboot.entry.User">
+        SELECT
+        <include refid="Column_List" />
+        FROM
+        <include refid="table_name" />
+        <include refid="select_conditon" />
+    </select>
+
+    <insert id="insert" parameterType="pers.panqt.springboot.entry.User">
+        INSERT INTO <include refid="table_name"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="createTime != null  ">create_time,</if>
+            <if test="departmentId != null  and departmentId != ''">department_id,</if>
+            <if test="roleId != null  and roleId != ''">role_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''"> #{userId, jdbcType=INTEGER},</if>
+            <if test="userName != null  and userName != ''"> #{userName, jdbcType=VARCHAR},</if>
+            <if test="createTime != null  ">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test="departmentId != null  and departmentId != ''">#{departmentId, jdbcType=INTEGER},</if>
+            <if test="roleId != null  and roleId != ''">#{roleId, jdbcType=INTEGER},</if>
+        </trim>
     </insert>
 
+    <update id="update" parameterType="pers.panqt.springboot.entry.User">
+        update <include refid="table_name"/>
+        set
+        <trim prefix="" suffix="" suffixOverrides=",">
+            <if test="userName != null  and userName != ''">user_name = #{userName, jdbcType=VARCHAR},</if>
+            <if test="createTime != null  ">create_time = #{createTime, jdbcType=VARCHAR},</if>
+            <if test="departmentId != null  and departmentId != ''">department_id = #{departmentId, jdbcType=INTEGER},</if>
+            <if test="roleId != null  and roleId != ''">role_id = #{roleId, jdbcType=INTEGER},</if>
+        </trim>
+        where user_id = #{userId, jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from <include refid="table_name"/> where user_id = #{userId, jdbcType=INTEGER}
+    </delete>
 </mapper>

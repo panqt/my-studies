@@ -1,7 +1,7 @@
 package pers.panqt.springboot.elasticsearch;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-import pers.panqt.springboot.entry.Book;
+import pers.panqt.springboot.entry.User;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
  *  @time       2019年02月02日	18:51
  *	@author     panqt
  *
- *	@comment    
+ *	@see pers.panqt.springboot.entry.User
  */
-public interface ElasticRepository extends ElasticsearchRepository<Book,Integer> {
-    public List<Book> findByNameLike(String name);
+public interface ElasticRepository extends ElasticsearchRepository<User,Integer> {
+    public List<User> findByUserNameLike(String userName);
 }
