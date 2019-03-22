@@ -2,14 +2,41 @@
 
 ### algorithm 算法
 
-### framework 框架
+### Dubbo RPC调用
 
-> springboot
+### Design Pattern 设计模式
 
-### middleware 中间件
+### Multi Thread 多线程
 
-### design-pattern 设计模式
+### Concurrent 并发
 
-### database 数据库
+### springboot 框架
 
-### nosql 缓存
+> springboot	
+>
+> redis	NoSql
+>
+> mysql	DB
+>
+> elasticsearch	搜索引擎NoSql
+>
+> rabbitmq	MQ
+>
+> mybatis	持久层
+>
+> mybatis-generator 逆向工程mybatis
+>
+> fastdfs	文件服务器
+>
+> mail	邮件
+>
+> scheduled	定时
+>
+> async	异步
+>
+> devtools	热部署
+>
+> thymeleaf	模板引擎
+>
+> pagehelper	Sql查询分页
+
