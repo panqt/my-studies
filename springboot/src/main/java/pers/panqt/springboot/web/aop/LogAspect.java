@@ -48,8 +48,8 @@ public class LogAspect {
         List<String> ls = new LinkedList<>();
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        stringBuilder.append(String.format("请求映射[ %s ]", httpServletRequest.getRequestURI())).append(",参数:[");
-
+        stringBuilder.append(String.format("请求映射:[ %s ]", httpServletRequest.getRequestURI()));
+        stringBuilder.append(String.format(",sessionid:[ %s ]", httpServletRequest.getRequestedSessionId())).append(",参数:[");
         Parameter[] params = signature.getMethod().getParameters();
         int idx = 0;
         for (Object arg : args) {

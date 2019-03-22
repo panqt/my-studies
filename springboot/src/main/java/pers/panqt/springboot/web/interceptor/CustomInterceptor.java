@@ -22,10 +22,9 @@ public class CustomInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        System.out.println("被拦截");
-        response.setStatus(404);
-        return false;
+        //System.out.println("被拦截");
+        //response.setStatus(404);
+        return true;
     }
 
     @Override

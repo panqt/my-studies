@@ -20,7 +20,7 @@ $(function () {
 function send(url,method,data) {
     $.ajax({
         type: method,
-        url: url,
+        url: "http://localhost/"+url,
         data: method.toUpperCase()=="GET"?data:JSON.stringify(data), //GET方法不带参数，是自动转化为URL，所以不能转为JSON字符串
         dataType: "json",
         contentType: "application/json;charset=UTF-8",

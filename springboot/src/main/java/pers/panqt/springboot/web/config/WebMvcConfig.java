@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pers.panqt.springboot.web.interceptor.CustomInterceptor;
+import pers.panqt.springboot.web.interceptor.SessionInterceptor;
 
 /**
  *  @time       2019年02月03日	13:35
@@ -19,11 +20,23 @@ import pers.panqt.springboot.web.interceptor.CustomInterceptor;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    CustomInterceptor customInterceptor;
+    private CustomInterceptor customInterceptor;
+
+    @Autowired
+    private SessionInterceptor sessionInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(customInterceptor).addPathPatterns("*").excludePathPatterns("/login");
+        registry.addInterceptor(customInterceptor).addPathPatterns("/*");
+        registry.addInterceptor(sessionInterceptor).addPathPatterns("/**").excludePathPatterns(
+                "/login",
+                "/auth",
+                "/",
+                "/welcome",
+                "/css/**",
+                "/js/**",
+                "/img/**"
+        );
     }
 
     @Override
