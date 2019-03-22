@@ -1,6 +1,6 @@
 # study-notes  学习笔记
 
-### algorithm 算法
+### Algorithm 算法
 
 ### Dubbo RPC调用
 
@@ -10,7 +10,7 @@
 
 ### Concurrent 并发
 
-### springboot 框架
+### Springboot 框架
 
 > springboot	
 >
