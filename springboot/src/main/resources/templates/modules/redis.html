@@ -1,0 +1,59 @@
+<!--  @auther panqt 2019/03/21 16:13  -->
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="/js/jquery1.8.3.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/modules/redis.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <title>mail.html</title>
+</head>
+<body>
+
+<div class="background">
+
+    <div class="header">
+        <div class="title img"><a href="/welcome"><img src="/img/logo.jpg"/></a> </div>
+        <div class="title text">Redis</div>
+
+        <div class="login-info">描述</div>
+        <div class="login-info">描述</div>
+    </div>
+    <hr>
+
+    <div class="box">
+        <div class="unit">
+            <div class="text">set</div>
+            <input type="button" id="set" value="缓存"/>
+        </div>
+        <div class="content">
+            <form id="fromset" >
+                userId：<input  name="userId" type="text" value="12">
+                userName：<input  name="userName" type="text" value="userName-12">
+                departmentId：<input name="departmentId" type="text" value="12">
+                roleId：<input name="roleId" type="text" value="12">
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="box">
+        <div class="unit">
+            <div class="text">get</div>
+            userId：<input  id="userId" type="text" value="12"><br>
+            <input type="button" id="get" value="获取"/>
+        </div>
+        <div class="content">
+            <form id="fromget" >
+                userName：<input name="userName" type="text" value="">
+                departmentId：<input  name="departmentId" type="text" value="">
+                roleId;：<input name="roleId" type="text" value="">
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

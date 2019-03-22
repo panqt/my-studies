@@ -1,0 +1,15 @@
+
+插件
+    Transaction
+        Ctrl+shilf+Y 打开翻译面板
+        Ctrl+shilf+X 直接代码翻译
+
+    Lombok
+        使用@Data等注解
+
+    Rainbow Brackets
+        彩色括号
+
+    FindBugs-IDEA
+        查找bug
+

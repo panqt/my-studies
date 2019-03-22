@@ -1,0 +1,74 @@
+@charset "utf-8";
+/**  @auther panqt 2019/03/19 21:55  */
+
+body{
+    margin: 0;
+    background-color: gainsboro;
+}
+.background{
+    width: 1000px;
+    height: auto;
+    margin: 0 auto;
+
+}
+.background hr{
+    margin: 0;
+
+}
+.header{
+    width: 1000px;
+    height: 100px;
+    background-color: antiquewhite;
+}
+
+.header div{
+    float: left;
+}
+.header .title{
+    height: 100%;
+}
+.header .text{
+    margin-left: 20px;
+    font-size: 60px;
+}
+.header .title img{
+    height: 100%;
+    width: 100px;
+}
+.header .description{
+    padding-top: 50px;
+    margin-left: 20px;
+}
+.header .login-info{
+    float: right;
+    padding-top: 50px;
+    margin-right: 20px;
+}
+
+.box{
+    float: left;
+    width: 320px;
+    height: 300px;
+    margin: 6px;
+    background-color: gainsboro;
+}
+
+.box .unit{
+    width: 320px;
+    height: 80px;
+}
+.box .unit .text{
+    width: 320px;
+    height: 55px;
+    font-size: 30px;
+}
+.box .unit input{
+
+    float: right;
+    margin-right: 20px;
+}
+
+.box .content{
+    width: 320px;
+    height: 220px;
+}

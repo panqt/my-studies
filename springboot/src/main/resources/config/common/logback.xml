@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="LOGGER_NAME" value="springboot-demo" />
+    <property name="LOGGER_HOME" value="D:/WorkSpace/Logs" />
+    <contextName>${LOGGER_NAME}</contextName>
+
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%level] %msg%n</pattern>
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%logger : %line] %msg%n</pattern>-->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%logger : %line] %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGGER_HOME}/${LOGGER_NAME}_%d{yyyyMMdd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>64 MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 日志文件保留30天 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <logger name="org.apache.ibatis.io.VFS" level="ERROR"/>
+    <logger name="org.apache.ibatis.io.JBoss6VFS" level="ERROR"/>
+    <logger name="org.apache.ibatis.io.DefaultVFS" level="ERROR"/>
+    <logger name="org.apache.ibatis.io.ResolverUtil" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.AbstractConnector" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.HttpInput" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.HttpConnection" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.HttpChannel" level="ERROR"/>
+    <logger name="org.eclipse.jetty.server.session" level="ERROR"/>
+    <logger name="org.eclipse.jetty.util" level="ERROR"/>
+    <logger name="org.eclipse.jetty.http" level="ERROR"/>
+    <logger name="org.eclipse.jetty.servlet" level="ERROR"/>
+    <logger name="org.eclipse.jetty.io" level="ERROR"/>
+    <logger name="org.apache.zookeeper" level="ERROR"/>
+    <logger name="org.I0Itec.zkclient" level="ERROR"/>
+    <logger name="org.apache.kafka" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.remoting" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.config" level="ERROR"/>
+    <logger name="com.alibaba.dubbo.monitor" level="FATAL"/>
+    <logger name="org.springframework.beans" level="ERROR"/>
+    <logger name="org.springframework.web" level="info"/>
+    <logger name="org.springframework.context" level="ERROR"/>
+    <logger name="org.springframework.core" level="ERROR"/>
+    <logger name="org.springframework.scheduling" level="ERROR"/>
+    <logger name="org.springframework.amqp" level="ERROR"/>
+    <logger name="org.springframework.boot" level="ERROR"/>
+    <logger name="org.springframework.jmx" level="ERROR"/>
+    <logger name="org.springframework.data" level="ERROR"/>
+    <logger name="org.springframework.session" level="ERROR"/>
+    <logger name="org.springframework.ui" level="ERROR"/>
+    <logger name="org.springframework.aop" level="ERROR"/>
+    <logger name="org.springframework.retry" level="ERROR"/>
+    <logger name="org.elasticsearch" level="ERROR"/>
+    <logger name="com.github.tobato.fastdfs" level="ERROR"/>
+    <logger name="org.apache.commons.beanutils.converters" level="ERROR"/>
+    <logger name="io.lettuce" level="ERROR"/>
+    <logger name="org.mybatis" level="ERROR"/>
+    <logger name="ocom.mchange.v2" level="ERROR"/>
+    <logger name="com.mchange.v2" level="ERROR"/>
+    <logger name="org.thymeleaf" level="ERROR"/>
+    <logger name="org.apache.catalina.core" level="ERROR"/>
+    <logger name="io.searchbox.client" level="ERROR"/>
+    <logger name="org.apache.commons.beanutils" level="ERROR"/>
+    <logger name="org.hibernate.validator" level="ERROR"/>
+    <logger name="org.apache.http.impl.nio" level="ERROR"/>
+    <logger name="io.netty" level="ERROR"/>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>

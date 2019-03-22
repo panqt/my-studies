@@ -1,0 +1,10 @@
+@charset "utf-8";
+/**  @auther panqt 2019/03/20 5:14  */
+.box .content img{
+    width: 320px;
+    height: 220px;
+}
+
+#textarea{
+    resize: none;
+}

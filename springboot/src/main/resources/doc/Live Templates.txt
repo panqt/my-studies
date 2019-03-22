@@ -1,0 +1,32 @@
+
+Live Templates
+@see https://www.jetbrains.com/help/idea/2018.1/edit-template-variables-dialog.html?utm_content=2018.1&utm_medium=link&utm_source=product&utm_campaign=IU
+
+类名第一个单词
+firstWord(spaceSeparated(className()))
+
+小写的类名第一个单词
+decapitalize(firstWord(spaceSeparated(className())))
+
+去-转大写
+underscoresToCamelCase()
+
+推荐下拉表
+enum("Service","Mapper")
+
+
+脚本格式
+groovyScript("_1 + _2", target, className())
+
+
+#截取文档链接方法
+groovyScript("if(_1.indexOf('{') >-1 && _1.indexOf('#')>-1){_1.substring(_1.indexOf(' ')+1,_1.lastIndexOf('#'));}", target)
+
+
+#截取文档链接类名
+groovyScript("if(_1.indexOf('{') >-1 && _1.indexOf('#')>-1){
+            String s = _1.substring(_1.indexOf(' ')+1,_1.lastIndexOf('#'));
+            String f = (s.substring(0,1).toLowerCase());
+            String b = s.substring(1,s.length());
+            return f+b;
+        }", target)

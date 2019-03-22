@@ -1,0 +1,62 @@
+<!--  @auther panqt 2019/03/20 4:45  -->
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="/js/jquery1.8.3.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/modules/fastdfs.base64.js"></script>
+    <script src="/js/modules/fastdfs.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/modules/fastdfs.css">
+    <title>fastdfs</title>
+</head>
+<body>
+
+<div class="background">
+
+    <div class="header">
+        <div class="title img"><a href="/welcome"><img src="/img/logo.jpg" width="100px"/></a> </div>
+        <div class="title text">FastDFS</div>
+        <div class="description"><input id="file" type="file" value="选择图片"></div>
+        <div class="description"><input id="clear_display" type="button" value="清除图片显示"></div>
+        <div class="description"><input id="clear_server" type="button" value="清空服务器"></div>
+        <div class="login-info">描述</div>
+        <div class="login-info">描述</div>
+    </div>
+    <hr>
+
+    <div class="box">
+        <div class="unit">
+            <div class="text">Multipart上传</div>
+            <input id="upload-mu" type="button" value="Multipart上传图片"/>
+        </div>
+        <div class="content"><img id="img" src="" width="320px" height="220px" alt=""></div>
+    </div>
+
+    <div class="box">
+        <div class="unit">
+            <div class="text">转Base64上传</div>
+            <input id="encode" type="button" value="转码成base64后上传"/>
+        </div>
+        <div class="content"><textarea id="base64_text" rows="15" cols="47" alt="">base64_text</textarea></div>
+    </div>
+
+    <div class="box">
+        <div class="unit">
+            <div class="text">Url直接访问FastDFS，转Base64</div>
+            <input id="decode_url" type="button" value="url访问fdfs数据转basa64"/>
+        </div>
+        <div class="content"><textarea id="url_text" rows="15" cols="47" alt="">url_text</textarea></div>
+    </div>
+
+    <div class="box">
+        <div class="unit">
+            <div class="text">从服务器下载Base64</div>
+            <input id="download_base64" type="button" value="url获取basa64"/>
+        </div>
+        <div class="content"><textarea id="download_base64_text" rows="15" cols="47" alt="">download_base64_text</textarea></div>
+    </div>
+</div>
+</body>
+</html>
