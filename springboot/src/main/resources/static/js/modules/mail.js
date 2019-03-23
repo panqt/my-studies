@@ -13,7 +13,7 @@ $(function () {
             "text":text
         };
 
-        $.request("modules/send-mail",data,"post",function (data) {
+        $.send("modules/send-mail",data,"post",function (data) {
             alert(data);
         })
     });

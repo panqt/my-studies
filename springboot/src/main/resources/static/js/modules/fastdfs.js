@@ -36,7 +36,7 @@ $(function () {
                 "base64Text":dataURL,
                 "exName":exName
             }
-            $.request("fastdfs/upload-base64",data,"post",function (result) {
+            $.send("fastdfs/upload-base64",data,"post",function (result) {
                 $("#url_text").text("因为是上传的base64字符串，不可以直接访问，需要解码：\n"+result);
                 $("#download_base64_text").text("因为是上传的base64字符串，不可以直接访问，可以从web服务器间接访问获得base64字符串：\n"+result);
             });
@@ -62,7 +62,7 @@ $(function () {
         var data = {
             "visitUrl":url
         };
-        $.request("fastdfs/download-base64",data,"post",function (data) {
+        $.send("fastdfs/download-base64",data,"post",function (data) {
             $("#download_base64_text").text(data);
             $("#img").attr("src",data);
         });
@@ -71,7 +71,7 @@ $(function () {
 
     //清空服务器
     $("#clear_server").click(function () {
-        $.request("fastdfs/deleteAll",{},"post",function (result) {
+        $.send("fastdfs/deleteAll",{},"post",function (result) {
             alert(result);
         });
     });

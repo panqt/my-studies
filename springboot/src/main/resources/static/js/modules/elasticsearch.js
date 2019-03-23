@@ -13,7 +13,7 @@ $(function () {
         console.log(data)
 
 
-        $.request("elasticsearch/save",data,"post",function (data) {
+        $.send("elasticsearch/save",data,"post",function (data) {
             alert("缓存成功");
         })
     });
@@ -21,14 +21,14 @@ $(function () {
 
     $("#get").click(function () {
         var userId = $("#userId").val();
-        $.request("elasticsearch/get",{"userId":userId},"post",function (data) {
+        $.send("elasticsearch/get",{"userId":userId},"post",function (data) {
             $('#fromget').formEdit(data);
         })
     });
 
     $("#getLike").click(function () {
         var userName = $("#userName").val();
-        $.request("elasticsearch/get-like",{"userName":userName},"post",function (data) {
+        $.send("elasticsearch/get-like",{"userName":userName},"post",function (data) {
             $('#fromget').formEdit(data);
 
             var str = ""

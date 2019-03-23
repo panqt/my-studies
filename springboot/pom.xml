@@ -87,11 +87,11 @@
         </dependency>
 
         <!--数据库+mybatis-->
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.3</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.mchange</groupId>-->
+            <!--<artifactId>c3p0</artifactId>-->
+            <!--<version>0.9.5.3</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -105,6 +105,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.14</version>
         </dependency>
 
 
@@ -121,7 +126,7 @@
         </dependency>
 
 
-        <!--modules-->
+        <!--fastdfs-->
         <dependency>
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
@@ -135,7 +140,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--devtools热部署-->
+        <!--devtools热部署 spring-boot-maven-plugin 也要配置-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -143,7 +148,7 @@
         </dependency>
 
 
-        <!--lombok @Data-->
+        <!--lombok @Data idea要安装插件-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -180,6 +185,7 @@
 
 
             <plugin>
+                <!--导入这个maven插件，利用idea打包，生成的jar包，可以使用java -jar xxx.jar启动-->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -190,6 +196,7 @@
 
 
             <!--添加mybatis generator maven插件-->
+            <!--在插件中用 mybatis-generator 生成实体类和mapper-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -252,14 +259,12 @@
                 <environment>local</environment>
             </properties>
         </profile>
-
         <profile>
             <id>cluter</id><!-- 集群 -->
             <properties>
                 <environment>cluter</environment>
             </properties>
         </profile>
-
         <profile>
             <id>single</id><!-- centos-200 -->
             <properties>

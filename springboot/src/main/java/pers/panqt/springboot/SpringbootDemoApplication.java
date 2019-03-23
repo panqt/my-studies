@@ -5,12 +5,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 /**  @auther panqt 2019/3/20// 9:51
  *
  *   @EnableScheduling  开启定时调度
  *   @EnableAsync   开启异步
  *   @MapperScan  扫描mapper
+ *   @EnableTransactionManagement 开启事务
  */
+@EnableTransactionManagement
 @EnableScheduling
 @EnableAsync
 @MapperScan("pers.panqt.springboot.modules.mybatis")

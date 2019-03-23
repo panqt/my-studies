@@ -4,7 +4,7 @@ $(function () {
 
         var message = $("#message").val();
 
-        $.request("rabbitmq/direct",{"message":message},"post",function (data) {
+        $.send("rabbitmq/direct",{"message":message},"post",function (data) {
             console.log();
         })
     });
@@ -18,7 +18,7 @@ $(function () {
         });
         data.routingKey = data.addr + '.' + data.type;
 
-        $.request("rabbitmq/topic",data,"post",function (data) {
+        $.send("rabbitmq/topic",data,"post",function (data) {
             console.log()
         })
     });

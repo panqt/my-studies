@@ -13,7 +13,7 @@ $(function () {
         console.log(data)
 
 
-        $.request("redis/set",data,"post",function (data) {
+        $.send("redis/set",data,"post",function (data) {
             alert(data);
         })
     });
@@ -21,7 +21,7 @@ $(function () {
 
     $("#get").click(function () {
         var userId = $("#userId").val();
-        $.request("redis/get",{"userId":userId},"post",function (data) {
+        $.send("redis/get",{"userId":userId},"post",function (data) {
             $('#fromget').formEdit(data);
         })
     });

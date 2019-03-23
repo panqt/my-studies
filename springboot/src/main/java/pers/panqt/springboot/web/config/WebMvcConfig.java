@@ -48,7 +48,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("*")
-                .allowCredentials(false)
+                //是否允许发送Cookie。 AJAX参数：withCredentials = true;
+                .allowCredentials(true)
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "DELETE", "PUT","PATCH")
                 .allowedOrigins("*")
