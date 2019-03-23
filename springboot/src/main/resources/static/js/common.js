@@ -4,7 +4,9 @@
  *
  *    @comment
  */
-var contextPath = "http://localhost:80/";
+//var contextPath = "http://localhost:80/";
+var contextPath = "http://localhost:80/springboot/";
+//var contextPath = "http://192.168.200.200/springboot/";
 
 
 // var form = new FormData();
@@ -28,6 +30,7 @@ function request(url,data,method,callback,contentType,processData) {
         processData: processData, //用于对data参数进行序列化处理
         contentType: contentType,
         async: true,
+        withCredentials: true,
         success: function(data){
             console.log(data);
             if(data.code == 200){

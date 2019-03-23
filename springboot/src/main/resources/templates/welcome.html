@@ -5,7 +5,7 @@
  ~  comment:
  -->
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Welcome</title>
@@ -14,34 +14,34 @@
 <h1>Welcome</h1>
 <ul>
     <li>
-        <a href="/template">template</a>
+        <a th:href="@{/template}">template</a>
     </li>
     <li>
-        <a href="/modules/fastdfs">FastDFS</a>
+        <a th:href="@{/modules/fastdfs}">FastDFS</a>
     </li>
     <li>
-        <a href="/modules/mail">mail</a>
+        <a th:href="@{/modules/mail}">mail</a>
     </li>
     <li>
-        <a href="/modules/redis">redis</a>
+        <a th:href="@{/modules/redis}">redis</a>
     </li>
     <li>
-        <a href="/modules/elasticsearch">elasticsearch</a>
+        <a th:href="@{/modules/elasticsearch}">elasticsearch</a>
     </li>
     <li>
-        <a href="/modules/rabbitmq">rabbitmq</a>
+        <a th:href="@{/modules/rabbitmq}">rabbitmq</a>
     </li>
     <li>
-        <a href="/modules/ajax">ajax</a>
+        <a th:href="@{/modules/ajax}">ajax</a>
     </li>
 
 
     <br>
     <li>
-        <a href="/login">login</a>
+        <a th:href="@{/login}">login</a>
     </li>
     <li>
-        <a href="/logout">logout</a>
+        <a th:href="@{/logout}">logout</a>
     </li>
 </ul>
 </body>

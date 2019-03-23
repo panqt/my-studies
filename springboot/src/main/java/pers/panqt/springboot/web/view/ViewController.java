@@ -9,6 +9,7 @@ import pers.panqt.springboot.entry.ResultVo;
 import pers.panqt.springboot.modules.redis.RedisService;
 import pers.panqt.springboot.web.exception.MyExceptionHandler;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -57,23 +58,37 @@ public class ViewController {
     public String ajax(){
         return "modules/ajax";
     }
-
-
-
     @GetMapping("login")
     public String login(HttpSession session){
         return "modules/login";
     }
+
+    /**关于 Cookie 属性
+     * @see <a>https://www.jianshu.com/p/2fea4478cc76</a> */
     @GetMapping("auth")
     public String auth(HttpSession session,String account,String password){
-        redisService.setValue("login-info-"+session.getId(),account+'-'+password);
-        log.debug("[ViewController.login line 59]: {}","登陆成功:"+account+'-'+password);
+
+        //设置session有效期 2 分钟
+        session.setMaxInactiveInterval(60*2);
+        session.setAttribute("login-info",account+'-'+password);
+
+        log.debug("登陆成功:{}-{}",account,password);
+
+        Cookie cookie = new Cookie("JSESSIONID",session.getId() );
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(-1);
+        cookie.setComment("springboot sessionid");
+        cookie.setVersion(0);
         return "redirect:/welcome";
     }
     @GetMapping("logout")
     public String logout(HttpSession session){
-        redisService.remove("login-info-"+session.getId());
-        log.debug("[ViewController.logout line 70]: {}","登出成功");
+
+        //session 失效
+        session.invalidate();
+        log.debug("登出成功");
         return "redirect:/welcome";
     }
+
 }

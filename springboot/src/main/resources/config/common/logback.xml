@@ -53,7 +53,7 @@
     <logger name="com.alibaba.dubbo.config" level="ERROR"/>
     <logger name="com.alibaba.dubbo.monitor" level="FATAL"/>
     <logger name="org.springframework.beans" level="ERROR"/>
-    <logger name="org.springframework.web" level="info"/>
+    <logger name="org.springframework.web" level="debug"/>
     <logger name="org.springframework.context" level="ERROR"/>
     <logger name="org.springframework.core" level="ERROR"/>
     <logger name="org.springframework.scheduling" level="ERROR"/>

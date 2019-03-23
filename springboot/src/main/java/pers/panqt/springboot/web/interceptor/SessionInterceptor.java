@@ -10,6 +10,7 @@ import pers.panqt.springboot.modules.redis.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**  @author panqt 2019/03/22 16:46
  *   登陆检查
@@ -19,19 +20,24 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class SessionInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired
-    private RedisService redisService;
+    /**
+     * 拦截器线程不安全，不要在方法外定义变量
+     */
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String sessionId = request.getSession().getId();
-        log.debug("[SessionInterceptor.preHandle line 25]: {}{}","登陆检查",sessionId);
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
 
-        Object o = redisService.getValue("login-info-"+sessionId);
+        Object o = session.getAttribute("login-info");
         if (o == null) {
-            response.sendRedirect(request.getContextPath()+"/login");
+            log.debug("登陆检查失败，请登录!");
+            response.sendRedirect(request.getContextPath()+"/welcome");
             return false;
         }
+        //刷新session有效期
+        session.setMaxInactiveInterval(60*2);
+        log.debug("登陆检查通过 SessionId:[{}]",sessionId);
         return true;
     }
 

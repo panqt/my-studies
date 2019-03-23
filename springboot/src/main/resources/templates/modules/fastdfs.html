@@ -1,14 +1,14 @@
 <!--  @auther panqt 2019/03/20 4:45  -->
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script src="/js/jquery1.8.3.js"></script>
-    <script src="/js/common.js"></script>
-    <script src="/js/modules/fastdfs.base64.js"></script>
-    <script src="/js/modules/fastdfs.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/modules/fastdfs.css">
+    <script th:src="@{/js/jquery1.8.3.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/modules/fastdfs.base64.js}"></script>
+    <script th:src="@{/js/modules/fastdfs.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modules/fastdfs.css}">
     <title>fastdfs</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
 <div class="background">
 
     <div class="header">
-        <div class="title img"><a href="/welcome"><img src="/img/logo.jpg" width="100px"/></a> </div>
+        <div class="title img"><a th:href="@{/welcome}"><img th:src="@{/img/logo.jpg}" width="100px"/></a> </div>
         <div class="title text">FastDFS</div>
         <div class="description"><input id="file" type="file" value="选择图片"></div>
         <div class="description"><input id="clear_display" type="button" value="清除图片显示"></div>
@@ -31,7 +31,7 @@
             <div class="text">Multipart上传</div>
             <input id="upload-mu" type="button" value="Multipart上传图片"/>
         </div>
-        <div class="content"><img id="img" src="" width="320px" height="220px" alt=""></div>
+        <div class="content"><img id="img" src="\" width="320px" height="220px" alt=""></div>
     </div>
 
     <div class="box">

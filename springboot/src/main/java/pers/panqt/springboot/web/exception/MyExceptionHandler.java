@@ -1,5 +1,6 @@
 package pers.panqt.springboot.web.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -17,37 +18,42 @@ import java.util.List;
  *
  *	@comment
  */
+@Slf4j
 @RestControllerAdvice
 public class MyExceptionHandler  {
 
-    private static Logger logger = LoggerFactory.getLogger(MyExceptionHandler.class);
+    @ExceptionHandler(ArithmeticException.class)
+    public ResultVo ArithmeticException(ArithmeticException e){
+        log.error("算术错误："+e.getMessage());
+        return new ResultVo(501,"算术错误："+e.getMessage());
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class,BindException.class})
+    public ResultVo argumentNotValid(Exception e){
+
+        List<ObjectError> errors = null;
+        if(e instanceof MethodArgumentNotValidException){
+            errors = ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors();
+        }else {
+            errors = ((BindException) e).getAllErrors();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (ObjectError oe : errors){
+            String s = oe.getCodes()[0];
+            String[] parts = s.split("\\.");
+            String part1 = parts[ parts.length-1];
+            sb.append("[").append(part1).append(":").append(oe.getDefaultMessage()).append("];");
+        }
+        log.error(sb.toString());
+        return new ResultVo(502,"参数错误："+sb.toString());
+    }
 
     @ExceptionHandler(Exception.class)
-    public ResultVo handler(Exception e){
-
-        if(e instanceof ArithmeticException){
-            logger.error("算术错误："+e.getMessage());
-            return new ResultVo(500,"算术错误："+e.getMessage());
-        }else if (e instanceof MethodArgumentNotValidException || e instanceof  BindException){
-            List<ObjectError> errors = null;
-            if(e instanceof MethodArgumentNotValidException){
-                errors = ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors();
-            }else {
-                errors = ((BindException) e).getAllErrors();
-            }
-
-            StringBuilder sb = new StringBuilder();
-            for (ObjectError oe : errors){
-                String s = oe.getCodes()[0];
-                String[] parts = s.split("\\.");
-                String part1 = parts[ parts.length-1];
-                sb.append("[").append(part1).append(":").append(oe.getDefaultMessage()).append("];");
-            }
-            logger.error(sb.toString());
-            return new ResultVo(500,"参数错误："+sb.toString());
-        }
+    private ResultVo exception(Exception e){
+        log.error(e.getMessage());
         e.printStackTrace();
-        return new ResultVo(500,e.getMessage());
-}
+        return new ResultVo(503,e.getMessage());
+    }
 }
 

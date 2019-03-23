@@ -1,5 +1,6 @@
 package pers.panqt.springboot.web.interceptor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,15 +16,23 @@ import pers.panqt.springboot.web.config.WebMvcConfig;
  *
  *	@see  {@link WebMvcConfig#addInterceptors}
  */
+@Slf4j
 @Component
 public class CustomInterceptor implements HandlerInterceptor {
 
-    private static Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //System.out.println("被拦截");
-        //response.setStatus(404);
+        if(request.getSession().isNew()){
+            log.debug("session 是新创建,[{}]",request.getSession().getId());
+        }
+
+        if(log.isDebugEnabled()){
+            //禁用缓存
+            response.setHeader("Cache-Control","no-cache");
+            response.setHeader("Pragma","no-cache");
+            response.setDateHeader("Expires",0);
+        }
+
         return true;
     }
 
@@ -34,12 +43,7 @@ public class CustomInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        if(logger.isDebugEnabled()){
-            //禁用缓存
-            response.setHeader("Cache-Control","no-cache");
-            response.setHeader("Pragma","no-cache");
-            response.setDateHeader("Expires",0);
-        }
+
     }
 
 
