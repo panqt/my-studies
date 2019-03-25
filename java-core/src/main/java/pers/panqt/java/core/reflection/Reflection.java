@@ -51,10 +51,10 @@ public class Reflection {
         method1.invoke(instance1,1);
         method2.invoke(instance1);
 
-
         //获取属性
         Field field = c1.getDeclaredField("s");
-        field.setAccessible(true);//可以访问private属性
+        //设置可以访问private属性
+        field.setAccessible(true);
         field.set(instance1,"略略略");
         instance1.sout();
 

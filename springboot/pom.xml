@@ -158,6 +158,14 @@
     </dependencies>
 
 
+    <!--部署到本地仓库-->
+    <distributionManagement>
+        <repository>
+            <id>localRepository</id>
+            <url>D:/Develop/maven-3.5.0/localRepository</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
