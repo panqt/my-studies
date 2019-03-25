@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pers.panqt.springboot.entry.ResultVo;
 import pers.panqt.springboot.entry.User;
+import pers.panqt.springboot.SpringbootDemoApplication;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *  @time       2019年02月02日	19:21
  *	@author     panqt
  *
- *	@see     {@link pers.panqt.springboot.SpringbootDemoApplication#main(String[])}
+ *	@see SpringbootDemoApplication#main
  */
 @RestController
 @RequestMapping("elasticsearch")

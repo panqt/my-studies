@@ -1,7 +1,10 @@
 package pers.panqt.springboot.modules.fastdfs;
 
+import com.github.tobato.fastdfs.conn.FdfsWebServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pers.panqt.springboot.entry.ResultVo;
@@ -22,8 +25,11 @@ import java.util.List;
 @RequestMapping("/fastdfs")
 public class FastdfsController {
 
-    @Value("${fdfs.web-server-url}")
     public String webServerUrl;
+    @Autowired
+    public void setWebServerUrl(FdfsWebServer fdfsWebServer){
+        webServerUrl = fdfsWebServer.getWebServerUrl();
+    }
 
     @Autowired
     FastdfsFileMapper fastdfsFileMapper;

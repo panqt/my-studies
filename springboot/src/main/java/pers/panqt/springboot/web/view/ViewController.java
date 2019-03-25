@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import pers.panqt.springboot.entry.ResultVo;
 import pers.panqt.springboot.modules.redis.RedisService;
 import pers.panqt.springboot.web.exception.MyExceptionHandler;
+import pers.panqt.springboot.web.interceptor.SessionInterceptor;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -63,8 +66,12 @@ public class ViewController {
         return "modules/login";
     }
 
+
     /**关于 Cookie 属性
-     * @see <a>https://www.jianshu.com/p/2fea4478cc76</a> */
+     * @see <a>https://www.jianshu.com/p/2fea4478cc76</a>
+     *
+     * @see SessionInterceptor#preHandle
+     * */
     @GetMapping("auth")
     public String auth(HttpSession session,String account,String password){
 

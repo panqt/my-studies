@@ -23,7 +23,7 @@ import java.util.List;
 public class MyExceptionHandler  {
 
     @ExceptionHandler(ArithmeticException.class)
-    public ResultVo ArithmeticException(ArithmeticException e){
+    public ResultVo arithmeticException(ArithmeticException e){
         log.error("算术错误："+e.getMessage());
         return new ResultVo(501,"算术错误："+e.getMessage());
     }

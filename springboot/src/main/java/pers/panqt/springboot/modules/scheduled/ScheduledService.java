@@ -2,6 +2,7 @@ package pers.panqt.springboot.modules.scheduled;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import pers.panqt.springboot.SpringbootDemoApplication;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Date;
  *  @time       2019年02月02日	21:56
  *	@author     panqt
  *
- *	@see    pers.panqt.springboot.SpringbootDemoApplication
+ *	@see    SpringbootDemoApplication
  *          加注解 @EnableScheduling
  */
 @Service

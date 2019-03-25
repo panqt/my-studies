@@ -17,10 +17,7 @@ public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
-    
-    /** @auther panqt 2019/3/23 5:38
-     *  @description 新增 Transaction
-     */
+
     @PostMapping("transaction/insert")
     public ResultVo<String> insert(ResultVo<String> resultVo){
         transactionService.insert();

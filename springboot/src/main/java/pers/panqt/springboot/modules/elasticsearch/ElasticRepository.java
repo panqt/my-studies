@@ -10,7 +10,7 @@ import java.util.List;
  *  @time       2019年02月02日	18:51
  *	@author     panqt
  *
- *	@see pers.panqt.springboot.entry.User
+ *	@see User
  */
 public interface ElasticRepository extends ElasticsearchRepository<User,Integer> {
     public List<User> findByUserNameLike(String userName);
