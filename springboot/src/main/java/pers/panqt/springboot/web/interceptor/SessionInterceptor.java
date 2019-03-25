@@ -28,6 +28,17 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        /**
+         * 禁用缓存的方式 <a>https://www.cnblogs.com/firstdream/p/8309584.html</a>
+         * response.setDateHeader("Expires", System.currentTimeMillis()+1*60*60*1000);
+         * */
+        if(log.isDebugEnabled()){
+            response.setHeader("Cache-Control","no-cache");
+            response.setHeader("Pragma","no-cache");
+            response.setDateHeader("Expires",0);
+        }
+
         HttpSession session = request.getSession();
         String sessionId = session.getId();
 
@@ -38,6 +49,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         Object o = session.getAttribute("login-info");
         if (o == null) {
             log.debug("登陆检查失败，请登录!");
+            //response.setStatus(510);
             response.sendRedirect(request.getContextPath()+"/welcome");
             return false;
         }
@@ -52,17 +64,8 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 
     }
 
-    /**
-     * 禁用缓存的方式 <a>https://www.cnblogs.com/firstdream/p/8309584.html</a>
-     * */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        if(log.isDebugEnabled()){
-            response.setHeader("Cache-Control","no-cache");
-            response.setHeader("Pragma","no-cache");
-            response.setDateHeader("Expires",0);
-        }
 
-        //response.setDateHeader("Expires", System.currentTimeMillis()+1*60*60*1000);
     }
 }

@@ -115,6 +115,8 @@ tracker_server=centos-101:22122
 
 
 
+重新编译nginx
+
 ```$ ./configure --prefix=/usr/java/nginx --with-http_stub_status_module --with-http_ssl_module --add-module=/usr/java/fastdfs-nginx-module/src --add-module=/usr/java/ngx_cache_purge```
 
 ##### 6、配置nginx
@@ -179,6 +181,9 @@ store_path0=/home/fastdfs/fdfs_storage
          server centos-100:8888 weight=1 max_fails=2 fail_timeout=30s;  
          server centos-101:8888 weight=1 max_fails=2 fail_timeout=30s;  
     }
+    upstream fdfs_group2 {  
+         server centos-102:8888 weight=1 max_fails=2 fail_timeout=30s; 
+    }
     
     server {
         listen       80;
@@ -186,6 +191,11 @@ store_path0=/home/fastdfs/fdfs_storage
 
         #group1的负载均衡配置  
         location /group1/M00 {  
+        	#公网nginx需要配置跨域跨域，
+        	add_header Access-Control-Allow-Origin *;
+    		add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    		add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+        
             proxy_next_upstream http_502 http_504 error timeout invalid_header;  
             proxy_cache http-cache;  
             proxy_cache_valid 200 304 12h;  
@@ -193,17 +203,21 @@ store_path0=/home/fastdfs/fdfs_storage
             #对应group1的服务设置  
             proxy_pass http://fdfs_group1;  
             expires 30d;  
-			ngx_fastdfs_module; //****重要****
+			ngx_fastdfs_module; //如果访问的是本机的storage就要配，访问其他主机注释掉
         }
-        location /group2/M00 {  
+        location /group2/M00 { 
+        	add_header Access-Control-Allow-Origin *;
+    		add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    		add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+        
             proxy_next_upstream http_502 http_504 error timeout invalid_header;  
             proxy_cache http-cache;  
             proxy_cache_valid 200 304 12h;  
             proxy_cache_key $uri$is_args$args;  
             #对应group2的服务设置  
-            proxy_pass http://centos-102:8888;  
+            proxy_pass http://fdfs_group2;  
             expires 30d;  
-			ngx_fastdfs_module;//****重要****
+			#ngx_fastdfs_module; //如果访问的是本机的storage就要配，访问其他主机注释掉
          }
         location ~/purge(/.*) {  
             allow 127.0.0.1;  

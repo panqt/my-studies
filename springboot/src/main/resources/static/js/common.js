@@ -41,6 +41,11 @@ function request(url,data,method,callback,contentType,processData) {
         },
         error: function (err) {
             alert("系统错误");
+        },statusCode: {
+            510:function (response) {
+                alert('1');
+                window.location.href=contextPath+"welcome";
+            }
         }
     });
 }

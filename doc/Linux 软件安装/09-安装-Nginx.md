@@ -60,7 +60,8 @@ PCRE(Perl Compatible Regular Expressions) 是一个Perl库，包括 perl 兼容�
 ```
 $ ./configure --prefix=/usr/java/nginx --with-http_stub_status_module --with-http_ssl_module 
 # --add-module=/usr/java/fastdfs-nginx-module/src       #fastdfs和nginx整合模块
-#--with-pcre=/usr/pcre            #就用默认的，不指定自定义的pcre
+# --add-module=/usr/java/fastdfs-nginx-module/src 		#fastdfs集群需要用到
+# --with-pcre=/usr/pcre            #就用默认的，不指定自定义的pcre
 ```
 
 ```$ make && make install```

@@ -36,11 +36,17 @@ path.data: /usr/java/elasticsearch/data
 path.logs: /usr/java/elasticsearch/logs
 ```
 
+```$ vi elasticsearch/config/jvm.options```
 
+```
+-Xms200m
+-Xmx200m
+```
 
 
 
 ##### 4、启动问题
+
 启动：```$ /usr/java/elasticsearch/bin/elasticsearch```
 
 - 无法使用root启动
