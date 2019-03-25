@@ -2,41 +2,43 @@
 
 ### Algorithm 算法
 
-### Dubbo RPC调用
+### Concurrent 并发
 
 ### Design Pattern 设计模式
 
-### Multi Thread 多线程
+### Dubbo RPC调用
 
-### Concurrent 并发
+### JVM 虚拟机
+
+### Multi Thread 多线程
 
 ### Springboot 框架
 
-> springboot	
+> redis
 >
-> redis	NoSql
+> mysql
 >
-> mysql	DB
+> elasticsearch
 >
-> elasticsearch	搜索引擎NoSql
+> rabbitmq
 >
-> rabbitmq	MQ
+> mybatis
 >
-> mybatis	持久层
+> mybatis-generator 
 >
-> mybatis-generator 逆向工程mybatis
+> fastdfs
 >
-> fastdfs	文件服务器
+> mail
 >
-> mail	邮件
+> scheduled
 >
-> scheduled	定时
+> async
 >
-> async	异步
+> devtools
 >
-> devtools	热部署
+> thymeleaf
 >
-> thymeleaf	模板引擎
+> pagehelper
 >
-> pagehelper	Sql查询分页
+> spring-session
 
