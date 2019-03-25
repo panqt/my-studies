@@ -1,4 +1,4 @@
-package pers.panqt.javase.reflection;
+package pers.panqt.java.core.reflection;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  */
 public class Reflection {
     public static void main(String[] args) throws Exception{
-        Class c1 = Class.forName("pers.panqt.javase.reflection.Reflection");
+        Class c1 = Class.forName("pers.panqt.java.core.reflection.Reflection");
         Class c2 = new Reflection().getClass();
         Class c3 = Reflection.class;
 
