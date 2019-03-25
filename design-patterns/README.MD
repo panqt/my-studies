@@ -1,33 +1,51 @@
 ### 创建模式
 > 00 SimpleFactory 简单工厂
+> 
 > 01 FactoryMethod 工厂方法
+> 
 > 02 AbstractFactory 抽象工厂
+> 
 > 03 Singleton 单例
+> 
 > 04 Builder 建造者
+> 
 > 05 Protype 原型
 ### 结构模式
 > 06 Adapter 适配器
+> 
 > 07 Decorator 装饰
+> 
 > 08 Proxy 代理
+> 
 > 09 Facade 外观
+> 
 > 10 Bridge 桥接
+> 
 > 11 Composite 组合
+> 
 > 12 Flyweight 享元
 ### 关系模式
 ##### 父类与子类关系
 > 13 Strategy 策略
+> 
 > 14 TemplateMethod 模板方法
 ##### 类之间的关系
 > 15 ObServer 观察者
+> 
 > 16 Iterator 迭代子
+> 
 > 17 ChainOfResponsibility 责任链
+> 
 > 18 Command 命令
 ##### 类的状态
 > 19 Memento 备忘录
+> 
 > 20 State 状态
 ##### 通过中间类
 > 21 Visitor 访问者
+> 
 > 22 Mediator 中介者
+> 
 > 23 Interpreter 解释器
 
 # 一、设计模式的分类
