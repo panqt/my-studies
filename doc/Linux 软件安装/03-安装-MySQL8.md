@@ -10,6 +10,8 @@
 
 ```$ tar -xvf mysql-8.0.15-linux-glibc2.12-x86_64.tar```
 
+```mv mysql-8.0.15-linux-glibc2.12-x86_64 mysql```  
+
 创建mysql用户
 
 ```$ groupadd mysql```
@@ -49,9 +51,9 @@ password is generated for root@localhost: VQw,jdY;*0jr
 datadir=/usr/java/mysql/data
 basedir=/usr/java/mysql
 port=3306
-#default-authentication-plugin=mysql_native_password
+default-authentication-plugin=mysql_native_password
 character-set-server=utf8mb4
-lower_case_table_names=1
+lower_case_table_names=1 #忽略表名大小写
 socket=/tmp/mysql.sock
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
@@ -91,6 +93,12 @@ export  PATH=$PATH:$MYSQL_HOME/lib:$MYSQL_HOME/bin
 ##### 3、添加到服务
 
 ​```$ cp /usr/java/mysql/support-files/mysql.server /etc/init.d/mysql```
+
+调整优先级 ```vi /etc/init.d/mysql```
+
+```
+# chkconfig: 2345 45 40
+```
 
  注册启动服务 ```$ chkconfig mysql on```
 

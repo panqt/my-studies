@@ -46,6 +46,11 @@ export PATH=$ZOOKEEPER_HOME/bin:$PATH
 ##### 3、开放防火墙
 
 添加：`$ sudo firewall-cmd --zone=public --add-port=2181/tcp --permanent`
+
+```$ sudo firewall-cmd --zone=public --add-port=2888/tcp --permanent```
+
+```$ sudo firewall-cmd --zone=public --add-port=3888/tcp --permanent```
+
 重启：`$ sudo firewall-cmd --reload`
 查看：`$ firewall-cmd --zone=public --list-port`
 
@@ -63,7 +68,7 @@ export PATH=$ZOOKEEPER_HOME/bin:$PATH
 
 ```shell
 #!/bin/sh
-# chkconfig: 2345 20 90
+# chkconfig: 2345 60 25
 # Description: zookeeper
 # processname: zookeeper
 
@@ -88,6 +93,8 @@ case $1 in
 esac
 
 ```
+
+```chmod 755 zookeeper  ```
 
 ```$ chkconfig zookeeper on```
 

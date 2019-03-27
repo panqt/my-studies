@@ -117,17 +117,39 @@ elasticsearch hard nproc 4096　
 ##### 6、防火墙开放端口
 
 添加：`$ sudo firewall-cmd --zone=public --add-port=9200/tcp --permanent`
+
+`$ sudo firewall-cmd --zone=public --add-port=9300/tcp --permanent`
+
 重启：`$ sudo firewall-cmd --reload`
 查看：`$ firewall-cmd --zone=public --list-port`
 
+##### 7、添加ik中文分词
 
+注意版本
 
-##### 7、添加到服务
+```
+./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.6.1/elasticsearch-analysis-ik-6.6.1.zip
+```
+
+或者
+
+```cd your-es-root/plugins/ && mkdir ik && cd ik```
+
+```unzip elasticsearch-analysis-ik-6.6.1.zip```
+
+```chown -R elasticsearch:elasticsearch .```
+
+```chmod 755 ./*```
+
+```rm -f elasticsearch-analysis-ik-6.6.1.zip```
+
+##### 8、添加到服务
 
 在/etc/rc.d/init.d下创建elasticsearch
 ```$ touch /etc/rc.d/init.d/elasticsearch```
 ```$ chmod 755 /etc/rc.d/init.d/elasticsearch```
 ```$ vi /etc/rc.d/init.d/elasticsearch```
+
 ```shell
 #!/bin/sh
 #chkconfig: 2345 80 05
@@ -179,3 +201,5 @@ exit $?
 ```$ sudo reboot```
 
 [ElasticSearch 集群](14-ElasticSearch-集群.md)
+
+[Elasticsearch: 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html)

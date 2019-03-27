@@ -60,7 +60,7 @@ PCRE(Perl Compatible Regular Expressions) 是一个Perl库，包括 perl 兼容�
 ```
 $ ./configure --prefix=/usr/java/nginx --with-http_stub_status_module --with-http_ssl_module 
 # --add-module=/usr/java/fastdfs-nginx-module/src       #fastdfs和nginx整合模块
-# --add-module=/usr/java/fastdfs-nginx-module/src 		#fastdfs集群需要用到
+# --add-module=/usr/java/ngx_cache_purge 		#fastdfs集群需要用到
 # --with-pcre=/usr/pcre            #就用默认的，不指定自定义的pcre
 ```
 
@@ -76,6 +76,10 @@ $ ./configure --prefix=/usr/java/nginx --with-http_stub_status_module --with-htt
 
 ##### 4、配置
 
+```$ firewall-cmd --zone=public --add-port=80/tcp --permanent```
+
+```$ firewall-cmd --reload```
+
 参考：
 
 
@@ -83,12 +87,12 @@ $ ./configure --prefix=/usr/java/nginx --with-http_stub_status_module --with-htt
 ```$ vi  /etc/init.d/nginx```
 ```
 #!/bin/bash
-# chkconfig: 2345 85 15
+# chkconfig: 2345 55 30
 # description: Nginx server control script
 # processname: nginx
 # config file: /usr/java/nginx/conf/nginx.conf
 # pid file: /usr/java/nginx/logs/nginx.pid
-# 
+#
 # source function library
 . /etc/rc.d/init.d/functions
 
@@ -98,7 +102,7 @@ NGINX_CONF_FILE="/usr/java/nginx/conf/nginx.conf"
 NGINX_LOCK_FILE="/var/lock/subsys/nginx.lock"
 
 # check current user
-[ "$USER" != "root" ] && exit 1
+# [ "$USER" != "root" ] && exit 1
 
 start() {
     status

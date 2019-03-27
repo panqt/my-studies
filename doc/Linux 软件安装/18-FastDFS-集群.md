@@ -114,7 +114,6 @@ tracker_server=centos-101:22122
 ```$ mv ngx_cache_purge-2.3 ngx_cache_purge```
 
 
-
 重新编译nginx
 
 ```$ ./configure --prefix=/usr/java/nginx --with-http_stub_status_module --with-http_ssl_module --add-module=/usr/java/fastdfs-nginx-module/src --add-module=/usr/java/ngx_cache_purge```
@@ -203,7 +202,6 @@ store_path0=/home/fastdfs/fdfs_storage
             #对应group1的服务设置  
             proxy_pass http://fdfs_group1;  
             expires 30d;  
-			ngx_fastdfs_module; //如果访问的是本机的storage就要配，访问其他主机注释掉
         }
         location /group2/M00 { 
         	add_header Access-Control-Allow-Origin *;
@@ -217,14 +215,8 @@ store_path0=/home/fastdfs/fdfs_storage
             #对应group2的服务设置  
             proxy_pass http://fdfs_group2;  
             expires 30d;  
-			#ngx_fastdfs_module; //如果访问的是本机的storage就要配，访问其他主机注释掉
          }
-        location ~/purge(/.*) {  
-            allow 127.0.0.1;  
-            allow 192.168.200.0/24;  
-            deny all;  
-            proxy_cache_purge http-cache $1$is_args$args;  
-        }        
+ 
         location / {
             root   html;
             index  index.html index.htm;
@@ -236,6 +228,25 @@ store_path0=/home/fastdfs/fdfs_storage
         location = /50x.html {
             root   html;
         }
+    }
+    
+    #访问本地storage
+	server {
+        listen       8888;
+        server_name  localhost2;
+
+        location /group1/M00 {  
+			root /home/fastdfs/storage/fdfs_storage/data;
+			ngx_fastdfs_module;
+         }
+
+        location ~/purge(/.*) {  
+            allow 127.0.0.1;  
+            allow 192.168.200.0/24;  
+            deny all;  
+            proxy_cache_purge http-cache $1$is_args$args;  
+        }  
+		
     }
 ```
 

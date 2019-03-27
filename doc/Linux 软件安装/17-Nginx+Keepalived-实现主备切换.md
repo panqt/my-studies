@@ -26,7 +26,9 @@
 ```$ make && make install```
 
 ```$ cp /usr/java/keepalived-2.0.13/keepalived/etc/init.d/keepalived /etc/init.d```
-不要执行：```$ cp /usr/java/keepalived-2.0.13/keepalived/etc/sysconfig/keepalived /etc/sysconfig/```[Keepalived 开机启动问题](../问题收集/Keepalived-开机启动问题.md)
+```$ cp /usr/java/keepalived-2.0.13/keepalived/etc/sysconfig/keepalived /etc/sysconfig/```
+
+ ```rm -f /lib/systemd/system/keepalived.service```[Keepalived 开机启动问题](../问题收集/Keepalived-开机启动问题.md)
 
 ```$ ln -s /usr/java/keepalived/sbin/keepalived /sbin/keepalived```
 ```$ ln -s /etc/keepalived /usr/java/keepalived/conf```
@@ -36,10 +38,20 @@
 ```$ service keepalived start```
 
 ##### 4、配置keepalived
+
+防火墙对 keepalived 开放
+
+```firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 --in-interface eno16777736 --destination 224.0.0.18 --protocol vrrp -j ACCEPT;```
+
+```firewall-cmd --reload;```
+
+
+
 ```$ cd /etc/keepalived/```
 ```$ cp keepalived.conf{,.bak} ```
 ```$ vi keepalived.conf```
 主机配置：
+
 ```
 ! Configuration File for keepalived
 
@@ -173,16 +185,17 @@ virtual_server 192.168.200.99 80 {
 
 创建检测脚本：```$ vi /etc/keepalived/check_nginx_alive.sh```
 ```
-#!/bin/bash    
-if [ "$(ps -ef | grep "nginx: master process"| grep -v grep )" == "" ]    
-then    
-service nginx start   
-sleep 5    
-if [ "$(ps -ef | grep "nginx: master process"| grep -v grep )" == "" ]    
-then    
-killall keepalived    
-fi    
-fi 
+#!/bin/bash
+if [ "$(ps -ef | grep "nginx: master process"| grep -v grep )" == "" ]
+        then
+                service keepalived stop
+                service nginx start
+                sleep 5
+                if [ "$(ps -ef | grep "nginx: master process"| grep -v grep )" != "" ]
+                        then
+                                service keepalived start
+                fi
+fi
 ```
 ```$ chmod +x /etc/keepalived/check_nginx_alive.sh```
 

@@ -4,6 +4,10 @@
 
 ```$ firewall-cmd --zone=public --add-port=15672/tcp --permanent```
 
+```$ firewall-cmd --zone=public --add-port=25672/tcp --permanent```
+
+```$ firewall-cmd --zone=public --add-port=4369/tcp --permanent```
+
 ```$ sudo firewall-cmd --reload```
 
 
@@ -36,7 +40,7 @@ erlang在安装前需要先安装下它的依赖工具:
 
 
 
-```$ ./configure --prefix=/usr/erlang --without-javac```
+```$ ./configure --prefix=/usr/java/erlang --without-javac```
 
 --prefix=/usr/erlang 是说明将当前的安装放在usr/erlang文件夹下。
 
@@ -58,7 +62,7 @@ erlang在安装前需要先安装下它的依赖工具:
 
 ```
 # erlang env
-export ERLANG_HOME=/usr/erlang/otp_src_21.2
+export ERLANG_HOME=/usr/java/erlang/
 export PATH=$ERLANG_HOME/bin:$PATH
 ```
 
@@ -95,7 +99,7 @@ export PATH=$PATH:${RABBITMQ_HOME}/sbin
 ```
 ```$ source /etc/profile```
 - 配置
-在./sbin/rabbitmq-defaults 文件中，CONFIG_FILE变量指定了配置文件的位置，CONF_ENV_FILE指定了rabbitmq-env.conf文件的位置
+在rabbitmq/sbin/rabbitmq-defaults 文件中，CONFIG_FILE变量指定了配置文件的位置，CONF_ENV_FILE指定了rabbitmq-env.conf文件的位置
 ```
 CONFIG_FILE=/usr/java/rabbitmq/etc/rabbitmq/rabbitmq
 CONF_ENV_FILE=/usr/java/rabbitmq/etc/rabbitmq/rabbitmq-env.conf
@@ -241,7 +245,7 @@ CONTROL=/usr/java/rabbitmq/sbin/rabbitmqctl
 
 USER=root
 ROTATE_SUFFIX=
-INIT_LOG_DIR=/var/log/rabbitmq
+INIT_LOG_DIR=/usr/java/rabbitmq/log
 PID_FILE=/var/run/rabbitmq/pid
  
 START_PROG="daemon"

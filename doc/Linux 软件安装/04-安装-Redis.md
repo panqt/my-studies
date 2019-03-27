@@ -35,12 +35,13 @@ libgcc-4.8.5-36.el7.x86_64
 ##### 3、配置
 - 后端启动方式
 ```$ vi /usr/java/redis/conf/redis-6379.conf```
-```
+``` 
 bind 0.0.0.0 #允许所有ip访问本机
 port 6379
 daemonize yes #守护进程，后台启动
 pidfile /var/run/redis_6379.pid
 #requirepass 123456 #密码，集群不能设密码
+bind 192.168.200.100 127.0.0.1  #绑定本机ip，被其他主机通过这个ip访问 127.0.0.1一定要放最后！！！！！
 ```
 [redis bind连不上的坑](https://www.cnblogs.com/suiyueqiannian/p/7808190.html)
 
@@ -59,8 +60,12 @@ pidfile /var/run/redis_6379.pid
 
 ##### 4、开放防火墙
 添加：```$ sudo firewall-cmd --zone=public --add-port=6379/tcp --permanent ```
+
+```sudo firewall-cmd --zone=public --add-port=16379/tcp --permanent```
+
 重启：```$ sudo firewall-cmd --reload```
 查看：```$ firewall-cmd --zone=public --list-port```
+
 ```
 [panqt@localhost redis-4.0.11]$ sudo firewall-cmd --zone=public --add-port=6379/tcp --permanent
 success
@@ -79,6 +84,7 @@ success
 ```
 #!/bin/sh
 # Redis init.d script
+# chkconfig: 2345 20 65
 
 REDISPORT=6379
 REDIS_HOME=/usr/java/redis

@@ -27,6 +27,7 @@ discovery.zen.minimum_master_nodes: 2   #(候选主节点数 / 2) + 1
 
 3、测试
 ```$ curl -XGET 'http://centos-100:9200/_cat/nodes?pretty'```
+
 ```
 [root@centos-100 panqt]# curl -XGET 'http://centos-100:9200/_cat/nodes?pretty'
 192.168.200.100 12 94 38 1.08 0.56 0.52 mdi - node-centos-100
@@ -35,3 +36,5 @@ discovery.zen.minimum_master_nodes: 2   #(候选主节点数 / 2) + 1
 ```
 
 [谈一谈Elasticsearch的集群部署](https://blog.csdn.net/zwgdft/article/details/54585644)
+
+[Elasticsearch: 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html)

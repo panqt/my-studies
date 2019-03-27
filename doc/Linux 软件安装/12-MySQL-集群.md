@@ -190,7 +190,7 @@ centos-100和centos-102主从复制，
 
 
 ```
-log-slave-updates=on
+log-slave-updates=on #同步数据也写日志 log
 ```
 
 
@@ -201,6 +201,8 @@ log-slave-updates=on
 
 ##### 4、主备切换
 参考：[Nginx+Keepalived 实现主备切换](17-Nginx+Keepalived-实现主备切换.md)，[Keepalived 开机启动问题](../问题收集/Keepalived-开机启动问题.md)
+
+```yum install net-tools```
 
 ```$ vi /etc/keepalived/check_mysql_alive.sh```
 
@@ -248,6 +250,14 @@ vrrp_instance mysql_ha {
 	}
 }
 ```
+
+防火墙对 keepalived 开放
+
+```firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 --in-interface eno16777736 --destination 224.0.0.18 --protocol vrrp -j ACCEPT;```
+
+```firewall-cmd --reload;```
+
+
 
 ##### 5、读写分离
 
@@ -317,6 +327,12 @@ mycat添加到服务：
 
 ```$ chkconfig mycat on```
 
+```$ sudo firewall-cmd --zone=public --add-port=8066/tcp --permanent ```
+
+```sudo firewall-cmd --zone=public --add-port=9066/tcp --permanent```
+
+重启：```$ sudo firewall-cmd --reload```
+
 
 ##### 6、Mycat+keepalived高可用
 [Keepalived 开机启动问题](../问题收集/Keepalived-开机启动问题.md)
@@ -324,17 +340,17 @@ mycat添加到服务：
 ```$ vi /etc/keepalived/check_mycat_alive.sh```
 
 ```
-#!/bin/bash    
-if [ "$(ps -ef | grep "io.mycat.MycatStartup start"| grep -v grep )" == "" ]    
-    then    
-        killall keepalived
-        system mycat start   
-        sleep 5    
-    if [ "$(ps -ef | grep "io.mycat.MycatStartup start"| grep -v grep )" != "" ]   
-        then    
+#!/bin/bash
+if [ "$(ps -ef | grep "io.mycat.MycatStartup start"| grep -v grep )" == "" ]
+    then
+        service keepalived stop
+        service mycat start
+        sleep 5
+    if [ "$(ps -ef | grep "io.mycat.MycatStartup start"| grep -v grep )" != "" ]
+        then
             service keepalived start
-    fi    
-fi 
+    fi
+fi
 ```
 
 ```$ chmod 755 /etc/keepalived/check_mycat_alive.sh```

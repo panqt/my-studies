@@ -14,9 +14,11 @@
 ```$ cd / && find -name .erlang.cookie```
 
 所有节点内容设置成一样的
-```$ chmod u+w ./root/.erlang.cookie```
-```$ vi ./root/.erlang.cookie ```
-```$ chmod u-w ./root/.erlang.cookie```
+```$ chmod u+w /root/.erlang.cookie```
+```$ vi /root/.erlang.cookie ```
+```$ chmod u-w /root/.erlang.cookie```
+
+重启主机！！！！！
 
 ##### 3、创建集群
 在centos-101、centos-102上执行下列命令

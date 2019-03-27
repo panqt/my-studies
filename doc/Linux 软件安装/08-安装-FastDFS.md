@@ -6,7 +6,17 @@ GitHub地址：https://github.com/happyfish100/FastDFS
 
 ```$ yum install gcc-c++```
 
+防火墙
 
+```$ firewall-cmd --zone=public --add-port=8888/tcp --permanent```
+
+```$ firewall-cmd --zone=public --add-port=8080/tcp --permanent```
+
+```$ firewall-cmd --zone=public --add-port=22122/tcp --permanent```
+
+```$ firewall-cmd --zone=public --add-port=23000/tcp --permanent```
+
+```$ firewall-cmd --reload```
 
 ##### 2、安装libevent
 
@@ -33,7 +43,7 @@ libfastcommon是FastDFS官方提供的，libfastcommon包含了FastDFS运行所�
 
 libfastcommon安装好后会自动将库文件拷贝至/usr/lib64下，由于FastDFS程序引用usr/lib目录所以需要将/usr/lib64下的库文件libfastcommon.so拷贝至/usr/lib下。（自己安装时，/usr/lib已有）
 
-```$ cp /usr/lib64/libfastcommon.so /usr/lib/```
+```$ ln -s /usr/lib64/libfastcommon.so /usr/lib/```
 
 
 
@@ -57,11 +67,12 @@ libfastcommon安装好后会自动将库文件拷贝至/usr/lib64下，由于Fas
 ```$ cd /usr/java/fastdfs/conf```
 ```$ cp tracker.conf.sample   tracker.conf```
 ```$ vi tracker.conf```
+
 ```properties
-base_path=/home/fastdfs
+base_path=/home/fastdfs/tracker/
 ```
 
-```$ mkdir -p /home/fastdfs ```
+```$ mkdir -p /home/fastdfs/tracker ```
 
 启动(也是重启)
 
@@ -91,8 +102,8 @@ storage编译安装 : 同tracker编译安装。
 
 ```properties
 group_name=group1
-base_path=/home/fastdfs
-store_path0=/home/fastdfs/fdfs_storage
+base_path=/home/fastdfs/storage
+store_path0=/home/fastdfs/storage/fdfs_storage
 #如果有多个挂载磁盘则定义多个store_path，如下
 #store_path1=......
 #store_path2=......
@@ -101,7 +112,7 @@ tracker_server=centos-100:22122   #配置tracker服务器:IP注意此IP不能�
 #tracker_server=.....
 ```
 
-```$ mkdir -p /home/fastdfs/fdfs_storage```
+```$ mkdir -p /home/fastdfs/storage/fdfs_storage```
 
 启动(也是重启)
 
@@ -148,6 +159,7 @@ http://192.168.200.100/group1/M00/00/00/wKjIZFyD8smAL87NAADtXa53YW0569_big.PNG
 ```$ chkconfig fdfs_trackerd on```
 
 ##### 8、[FastDFS 和 Nginx 整合](10-FastDFS-和-Nginx-整合.md)
+
 <br>
 参考：
 [Centos7安装部署fastDFS](https://blog.csdn.net/ityqing/article/details/82685533)

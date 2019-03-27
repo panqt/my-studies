@@ -4,7 +4,7 @@
 
 3个CentOS 7 虚拟机
 
-6个Redis 实例
+6个Redis 实例，redis集群需要至少3个主节点
 
 | 192.168.200.100 | 192.168.200.101 | 192.168.200.102 |
 | --------------- | --------------- | --------------- |
@@ -20,6 +20,7 @@ cluster-enabled yes
 cluster-config-file nodes-6379.conf #注意改成实例的端口
 cluster-node-timeout 5000
 appendonly yes
+bind 192.168.200.100 127.0.0.1 #绑定本机ip，127.0.0.1一定要放最后！！！！！
 ```
 
 将实例都启动。
@@ -61,6 +62,8 @@ $ rvm install 2.4.1
 
 ##### 4、创建集群
 
+集群至少3个**主**节点，如果添加6380端口redis，要开放集群总线端口16380
+
 ```cd /usr/java/redis/bin```
 
 ```
@@ -77,11 +80,9 @@ redis-trib对主机名支持不好，所以用 ip:port
 
 redis集群创建时报错：Sorry, can't connect to node 
 
-bind 设置0.0.0.0，允许所有ip访问本机
-
 ip，端口等都配置正确的话，还需要将redis.conf文件中的密码注释掉    # requirepass 123456
 
-
+如果创建不成功，修改后，试试第六节。删除失败的节点信息，重新再创建
 
 ##### 5、测试
 
