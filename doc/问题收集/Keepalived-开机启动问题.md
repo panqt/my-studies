@@ -6,3 +6,4 @@
 
 后来发现是 /lib/systemd/system/keepalived.service  搞的鬼。。。
 /lib/systemd/system/keepalived.service 是 systemd 的启动程序，也是开机启动，在这里改启动顺序，或者删掉这个systemd 。使用init.d启动
+

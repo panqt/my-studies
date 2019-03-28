@@ -58,7 +58,7 @@
     <logger name="org.springframework.core" level="ERROR"/>
     <logger name="org.springframework.scheduling" level="ERROR"/>
     <logger name="org.springframework.amqp" level="ERROR"/>
-    <logger name="org.springframework.boot" level="debug"/>
+    <logger name="org.springframework.boot" level="ERROR"/>
     <logger name="org.springframework.jmx" level="ERROR"/>
     <logger name="org.springframework.data" level="ERROR"/>
     <logger name="org.springframework.session" level="ERROR"/>
@@ -66,7 +66,7 @@
     <logger name="org.springframework.aop" level="ERROR"/>
     <logger name="org.springframework.retry" level="ERROR"/>
     <logger name="org.elasticsearch" level="ERROR"/>
-    <logger name="com.github.tobato.fastdfs" level="ERROR"/>
+    <logger name="com.github.tobato.fastdfs" level="debug"/>
     <logger name="org.apache.commons.beanutils.converters" level="ERROR"/>
     <logger name="io.lettuce" level="ERROR"/>
     <logger name="org.mybatis" level="ERROR"/>
@@ -80,7 +80,7 @@
     <logger name="org.apache.http.impl.nio" level="ERROR"/>
     <logger name="io.netty" level="ERROR"/>
 
-    <root level="debug">
+    <root level="ERROR">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE" />
     </root>

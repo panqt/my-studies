@@ -11,6 +11,10 @@
 
 ```chmod 700 ~/.ssh```
 
+```mv id_rsa.pub ./.ssh/```
+
+```cd ./.ssh/```
+
 生成authorized_keys文件：```cat id_rsa.pub >>authorized_keys```
 
 ```chmod 600 authorized_keys```
