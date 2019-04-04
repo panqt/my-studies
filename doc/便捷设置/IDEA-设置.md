@@ -6,3 +6,36 @@
 - [IDEA编写shell脚本](https://blog.csdn.net/u012443641/article/details/81295999)
 - [禁止Chrome缓存](https://blog.csdn.net/yiifaa/article/details/54290047)
 - [热部署及LiveReload](https://www.cnblogs.com/yjmyzz/p/use-devtools-of-spring-boot-framework.html)
+
+
+
+
+
+Alibaba Java Coding Guidelines
+
+BashSupport
+
+FindBugs
+
+Grep Console
+
+GsonFormat
+
+Rainbow Brackets
+
+Translation
+
+Vue.js
+
+Lombok Plugin
+
+```
+<!--lombok @Data idea要安装插件-->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.16.20</version>
+    <scope>provided</scope>
+</dependency>
+```
+

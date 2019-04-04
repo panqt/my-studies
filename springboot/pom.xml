@@ -262,25 +262,20 @@
     <!-- 环境 -->
     <profiles>
         <profile>
-            <id>local</id><!-- 本地 -->
-            <properties>
-                <environment>local</environment>
-            </properties>
-        </profile>
-        <profile>
             <id>cluter</id><!-- 集群 -->
             <properties>
                 <environment>cluter</environment>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault><!-- 设置默认激活这个配置 -->
-            </activation>
+
         </profile>
         <profile>
-            <id>single</id><!-- centos-200 -->
+            <id>single</id><!-- 单实例 centos-200 -->
             <properties>
                 <environment>single</environment>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault><!-- 设置默认激活这个配置 -->
+            </activation>
         </profile>
     </profiles>
 </project>

@@ -3,6 +3,8 @@ package pers.panqt.springboot.web.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -11,6 +13,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pers.panqt.springboot.web.interceptor.SessionInterceptor;
+import pers.panqt.springboot.web.interceptor.SessionInterceptor2;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *  @time       2019年02月03日	13:35
@@ -24,17 +29,40 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private SessionInterceptor sessionInterceptor;
+    @Autowired
+    private SessionInterceptor2 sessionInterceptor2;
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sessionInterceptor).addPathPatterns("/**").excludePathPatterns(
-                "/login",
-                "/auth",
                 "/",
-                "/welcome",
+                "/auth",
                 "/css/**",
                 "/js/**",
-                "/img/**"
+                "/img/**",
+
+                "/welcome",
+                "/modules/login",
+                "/template",
+                "/modules/fastdfs",
+                "/modules/mail",
+                "/modules/redis",
+                "/modules/elasticsearch",
+                "/modules/rabbitmq",
+                "/modules/ajax"
+
+        );
+
+        registry.addInterceptor(sessionInterceptor2).addPathPatterns("/**").excludePathPatterns(
+                "/",
+                "/auth",
+                "/css/**",
+                "/js/**",
+                "/img/**",
+
+                "/welcome",
+                "/modules/login"
         );
     }
 
@@ -44,7 +72,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("welcome");
-
     }
 
     /**<a>http://www.ruanyifeng.com/blog/2016/04/cors.html</a>

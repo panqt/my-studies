@@ -33,10 +33,13 @@ function request(url,data,method,callback,contentType,processData) {
         withCredentials: true,
         success: function(data){
             console.log(data);
-            if(data.code == 200){
-                callback(data.data);
-            }else {
-                alert(data.message);
+
+            switch (data.code){
+                case 200:
+                    callback(data.data);break;
+                case 600:
+                    window.location.href=contextPath+"login";break;
+                default:alert(data.message);
             }
         },
         error: function (err) {

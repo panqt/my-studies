@@ -1,4 +1,4 @@
-package pers.panqt.springboot.web.ajax;
+package pers.panqt.springboot.modules.ajax;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +10,7 @@ import pers.panqt.springboot.entry.User;
  *   测试 Ajax 请求
  */
 @Slf4j
+@RequestMapping("ajax")
 @RestController
 public class AjaxRequestController {
 
@@ -19,31 +20,31 @@ public class AjaxRequestController {
      *
      *   static/js/modules/ajax.js
      */
-    @GetMapping("ajax/get/{id}")
+    @GetMapping("get/{id}")
     public ResultVo get(ResultVo resultVo, @PathVariable("id") String id, @Validated User user){
         resultVo.setData("get");
         return resultVo;
     }
     
-    @PutMapping("ajax/put")
+    @PutMapping("put")
     public ResultVo<String> put(ResultVo<String> resultVo, @RequestBody @Validated User user){
         resultVo.setData("put");
         return resultVo;
     }
 
-    @PostMapping("ajax/post")
+    @PostMapping("post")
     public ResultVo<String> post(ResultVo<String> resultVo, @RequestBody @Validated User user){
         resultVo.setData("post");
         return resultVo;
     }
 
-    @DeleteMapping("ajax/delete/{id}")
+    @DeleteMapping("delete/{id}")
     public ResultVo<String> delete(ResultVo<String> resultVo, @PathVariable("id") String id,@RequestBody @Validated User user){
         resultVo.setData("delete");
         return resultVo;
     }
 
-    @DeleteMapping("ajax/delete-list")
+    @DeleteMapping("delete-list")
     public ResultVo<String> deleteList(ResultVo<String> resultVo, @RequestBody String[] ids){
         for(String id : ids){
             System.out.println(id);

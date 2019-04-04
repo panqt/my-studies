@@ -33,9 +33,9 @@ public class ViewController {
         log.debug("welcome 首页");
         return "welcome";
     }
-    @GetMapping("template")
+    @GetMapping("modules/template")
     public String template(){
-        return "template";
+        return "modules/template";
     }
     @GetMapping("modules/fastdfs")
     public String fdfshome(){
@@ -61,41 +61,8 @@ public class ViewController {
     public String ajax(){
         return "modules/ajax";
     }
-    @GetMapping("login")
+    @GetMapping("modules/login")
     public String login(HttpSession session){
         return "modules/login";
     }
-
-
-    /**关于 Cookie 属性
-     * @see <a>https://www.jianshu.com/p/2fea4478cc76</a>
-     *
-     * @see SessionInterceptor#preHandle
-     * */
-    @GetMapping("auth")
-    public String auth(HttpSession session,String account,String password){
-
-        //设置session有效期 2 分钟
-        session.setMaxInactiveInterval(60*2);
-        session.setAttribute("login-info",account+'-'+password);
-
-        log.debug("登陆成功:{}-{}",account,password);
-
-        Cookie cookie = new Cookie("JSESSIONID",session.getId() );
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(-1);
-        cookie.setComment("springboot sessionid");
-        cookie.setVersion(0);
-        return "redirect:/welcome";
-    }
-    @GetMapping("logout")
-    public String logout(HttpSession session){
-
-        //session 失效
-        session.invalidate();
-        log.debug("登出成功");
-        return "redirect:/welcome";
-    }
-
 }

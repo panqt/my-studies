@@ -20,7 +20,8 @@ cluster-enabled yes
 cluster-config-file nodes-6379.conf #注意改成实例的端口
 cluster-node-timeout 5000
 appendonly yes
-bind 192.168.200.100 127.0.0.1 #绑定本机ip，127.0.0.1一定要放最后！！！！！
+bind 192.168.200.100 #不要绑定127.0.0.1！！！！！
+cluster-require-full-coverage no #如果为yes，一旦有槽未被覆盖，整个集群就会停止
 ```
 
 将实例都启动。

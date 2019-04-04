@@ -2,32 +2,32 @@
 
 ##### 1、安装环境与版本
 
-3个CentOS 7 虚拟机 
+4个CentOS 7 虚拟机 
 
-3个MySQL8实例，双主双从
+4个MySQL8实例，双主双从
 
-| centos-100      | centos-101      | centos-102     |
-| --------------- | --------------- | -------------- |
-| mysql（master） | mysql（master） | mysql（slave） |
-| keepalived      | keepalived      |                |
-| mycat         | mycat  |                |
+| centos-100      | centos-102      | centos-101     | centos-103 |
+| --------------- | --------------- | -------------- | -------------- |
+| mysql（master） | mysql（master） | mysql（slave） | mysql（slave） |
+| keepalived      | keepalived      |                |                |
+| mycat         | mycat  |                |                |
 ![](../images/16025102-9263c7f0dcc6f2a2.png)
 
 ##### 2、主从复制
 
-- **主节点（centos-100）点配置**
+- **主节点（centos-100，centos-102）点配置**
 
   ```$ vi /etc/my.cnf```
 
   ```
   [mysqld]
   log-bin=mysql-bin #主节点需要开启二进制日志
-  server-id=100
+  server-id=100 #注意不能相同
   ```
 
 
 
-- **从节点（centos-101、centos-102）配置**
+- **从节点（centos-101，centos-103）配置**
 
   ```$ vi /etc/my.cnf```
 
@@ -35,7 +35,7 @@
 
   ```
   [mysqld]
-  server-id=101
+  server-id=101 #注意不能相同
 
   #replicate_wild_do_table=test.%                    #只同步test库下的表
   #relay_log=mysqld-relay-bin                        #记录中继日志
@@ -46,7 +46,7 @@
 
 - **创建用于复制操作的用户**
 
-  连上主节点，在主节点创建一个用户repl，用于从节点链接主节点时使用。
+  连上主节点，在2个主节点创建一个用户repl，用于从节点链接主节点时使用。
 
   ```
   mysql> CREATE USER 'repl'@'192.168.200.%' IDENTIFIED WITH mysql_native_password BY 'repl';
@@ -80,11 +80,11 @@
 
   ```
   mysql> CHANGE MASTER TO
-  MASTER_HOST='192.168.200.100', #主主复制时特别注意修改，搞了我半天
+  MASTER_HOST='192.168.200.100', #注意修改，从填对应的主机
   MASTER_USER='repl',
   MASTER_PASSWORD='repl',
-  MASTER_LOG_FILE='binlog.000003',
-  MASTER_LOG_POS=155;
+  MASTER_LOG_FILE='binlog.000003', #注意修改，填对应的主机
+  MASTER_LOG_POS=155; #注意修改，填对应的主机
   ```
 
   开启主从同步
@@ -147,13 +147,11 @@
   mysql> show databases;
   ```
 
-  
+  centos-100 → 103， centos102→101分别建立了主从同步
 
 ##### 3、主主复制
 
 主主复制即两个节点互为主从。
-
-centos-101已经是centos-100的从节点，再配置centos-100成centos-101的从节点。
 
 ```$ vi /etc/my.cnf```
 
@@ -161,101 +159,30 @@ centos-101已经是centos-100的从节点，再配置centos-100成centos-101的�
 centos-100:
 
 ```
+log-bin=mysql-bin #主节点需要开启二进制日志
 auto_increment_increment=2         #步进值auto_imcrement。一般有n台主MySQL就填n
 auto_increment_offset=1            #起始值。一般填第n台主MySQL。此时为第一台主MySQL
+log-slave-updates=on #同步数据也写日志，让从机也能继续同步实现 102→100→103
 ```
 
-centos-101:
+centos-102:
 
 ```
-log-bin=mysql-bin #主节点需要开启二进制日志
-
+log-bin=mysql-bin #主节点需要开启二进制日志，
 auto_increment_increment=2         #步进值auto_imcrement。一般有n台主MySQL就填n
 auto_increment_offset=2            #起始值。一般填第n台主MySQL。此时为第二台主MySQL
+log-slave-updates=on #同步数据也写日志，让从机也能继续同步实现 102→100→103
 ```
 
-再按照第二步的主从复制将centos-100配置成centos-101的从节点
+设置了步进和起始值，这样在自增id的时候就不会冲突了。
+
+再按照第二步的主从复制将centos-100，centos-102互相配置成主从同步
 
 
 
-这样centos-100和centos-101主主复制，
+重启两个主节点：```$ service mysql restart```
 
-centos-100和centos-102主从复制，
-
-但centos-101和centos-102却没有主从复制。
-
-在互为主从的centos-101和centos-102配置文件中加入下面的配置
-
-```$ vi /etc/my.cnf```
-
-
-```
-log-slave-updates=on #同步数据也写日志 log
-```
-
-
-
-重启所有节点：```$ service mysql restart```
-
-在两个主节点分别插入数据，各节点都能查到数据。
-
-##### 4、主备切换
-参考：[Nginx+Keepalived 实现主备切换](17-Nginx+Keepalived-实现主备切换.md)，[Keepalived 开机启动问题](../问题收集/Keepalived-开机启动问题.md)
-
-```yum install net-tools```
-
-```$ vi /etc/keepalived/check_mysql_alive.sh```
-
-```
-#!/bin/bash
-#This scripts is check for Mysql Slave status
-counter=$(netstat -na|grep "LISTEN"|grep "3306"|wc -l)
-if [ "${counter}" -eq 0 ]; then
-    systemctl stop keepalived
-    killall keepalived
-fi
-ping centos-100 -w1 -c1 &>/dev/null
-if [ $? -ne 0 ]
-then
-    systemctl stop keepalived
-    killall keepalived
-fi
-```
-```$ chmod 755 /etc/keepalived/check_mysql_alive.sh```
-
-```$ vi /etc/keepalived/keepalived.conf```
-
-```
-vrrp_script check_mysql_alive {
-        script "/etc/keepalived/check_mysql_alive.sh"   
-        interval 2   
-        weight -10  
-}
-
-vrrp_instance mysql_ha {
-    state MASTER 
-    interface eno16777736 
-    virtual_router_id 15
-    priority 102       
-    advert_int 1        
-    authentication {
-        auth_type PASS 
-        auth_pass 1111 
-    }
-    virtual_ipaddress {
-        192.168.200.98/24 dev eno16777736
-    }
-	track_script {
-		check_mysql_alive
-	}
-}
-```
-
-防火墙对 keepalived 开放
-
-```firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 --in-interface eno16777736 --destination 224.0.0.18 --protocol vrrp -j ACCEPT;```
-
-```firewall-cmd --reload;```
+在两个主节点分别插入数据，所有节点都能查到数据。
 
 
 
@@ -272,7 +199,7 @@ vrrp_instance mysql_ha {
 ```
 <user name="test" defaultAccount="true">
     <property name="password">test</property>
-    <property name="schemas">test</property>
+    <property name="schemas">springboot</property>
 </user>
 ```
 
@@ -283,20 +210,21 @@ vrrp_instance mysql_ha {
 <!DOCTYPE mycat:schema SYSTEM "schema.dtd">
 <mycat:schema xmlns:mycat="http://io.mycat/">
 
-	<schema name="test" checkSQLschema="true" sqlMaxLimit="100" dataNode="dn1"></schema>
+	<schema name="springboot" checkSQLschema="true" sqlMaxLimit="100" dataNode="dn1"></schema>
 	
-	<dataNode name="dn1" dataHost="centos" database="test" />
+	<dataNode name="dn1" dataHost="centos" database="springboot" />
 	
-	<dataHost name="centos" maxCon="1000" minCon="10" balance="0"
-			  writeType="0" dbType="mysql" dbDriver="jdbc" switchType="1"  slaveThreshold="100">
+	<dataHost name="centos" maxCon="1000" minCon="10" balance="1"
+			  writeType="0" dbType="mysql" dbDriver="jdbc" switchType="2"  slaveThreshold="100">
 		<heartbeat>show slave status</heartbeat>
 		
-		<writeHost host="HostMaster" url="jdbc:mysql://centos-98:3306?useSSL=false&amp;serverTimezone=UTC" user="panqt" password="panqt">
-			<readHost host="HostSlave" url="jdbc:mysql://centos-102:3306?useSSL=false&amp;serverTimezone=UTC" user="panqt" password="panqt" />
+		<writeHost host="Master1" url="jdbc:mysql://centos-100:3306?useSSL=false&amp;serverTimezone=UTC" user="panqt" password="panqt">
+			<readHost host="Slave1" url="jdbc:mysql://centos-103:3306?useSSL=false&amp;serverTimezone=UTC" user="panqt" password="panqt" />
 		</writeHost>
-
+		<writeHost host="Master2" url="jdbc:mysql://centos-102:3306?useSSL=false&amp;serverTimezone=UTC" user="panqt" password="panqt">
+			<readHost host="Slave2" url="jdbc:mysql://centos-101:3306?useSSL=false&amp;serverTimezone=UTC" user="panqt" password="panqt" />
+		</writeHost>
 	</dataHost>
-
 </mycat:schema>
 ```
 ```$ vi /usr/java/mycat/conf/wrapper.conf```
@@ -333,9 +261,26 @@ mycat添加到服务：
 
 重启：```$ sudo firewall-cmd --reload```
 
+```
 
-##### 6、Mycat+keepalived高可用
-[Keepalived 开机启动问题](../问题收集/Keepalived-开机启动问题.md)
+balance="1"，全部的 readHost 与 stand by writeHost (空闲写) 参与 select 语句的负载均衡，简单的说，当双主双从模式(M1->S1，M2->S2，并且 M1 与 M2 互为主备)，正常情况下，在M1写，M2,S1,S2 都参与 select 语句的负载均衡。 
+
+writeType="0", 所有写操作发送到配置的第一个 writeHost，第一个挂了切到还生存的第二个writeHost，重新启动后已切换后的为准，切换记录在配置文件中:dnindex.properties
+
+switchType="2" 基于 MySQL 主从同步的状态决定是否切换，心跳语句为 show slave status
+经测试：当 Master1 挂掉后，会让 Master2 成为主写，并且不再读 Slave1
+switchType="1" 默认值，自动切换
+发现 与switchType="2"效果一样
+switchType="3" 默认值，自动切换 心跳语句为 show status like 'wsrep%'
+发现 与switchType="2"效果一样
+
+```
+
+
+
+
+##### 6、Mycat+keepalived高可用，
+参考：[Nginx+Keepalived整合](17-Nginx+Keepalived-实现主备切换.md)
 
 ```$ vi /etc/keepalived/check_mycat_alive.sh```
 
