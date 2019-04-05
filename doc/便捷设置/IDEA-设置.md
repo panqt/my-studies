@@ -9,6 +9,8 @@
 
 
 
+License Server：http://idea.iblue.me
+
 
 
 Alibaba Java Coding Guidelines

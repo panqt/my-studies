@@ -5,9 +5,6 @@
 ## Build Setup
 
 ``` bash
-#init 
-vue init webpack vue-demo
-
 # install dependencies
 npm install
 
@@ -27,7 +24,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 
 
-# 启动springboot 项目，开启后端支持
+# 
 
 
 
@@ -47,5 +44,8 @@ nrm use taobao
 
 # 安装vue脚手架
 npm i -g vue-cli
+
+#init 
+vue init webpack vue-demo
 ```
 

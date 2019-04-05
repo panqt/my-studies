@@ -1,7 +1,7 @@
 {
   "name": "vue-demo",
   "version": "1.0.0",
-  "description": "vue-demo",
+  "description": "vue case",
   "author": "panqt <1255457995@qq.com>",
   "private": true,
   "scripts": {
@@ -10,6 +10,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "material-design-icons": "^3.0.1",
+    "muse-ui": "^3.0.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
