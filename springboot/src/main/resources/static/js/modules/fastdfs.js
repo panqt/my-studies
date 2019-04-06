@@ -18,7 +18,7 @@ $(function () {
         //console.log($("#file").prop('files')[0]);
         form.append("file", $("#file").prop('files')[0]);
         $.upload("fastdfs/upload-mu",form,function (url) {
-            $("#img").attr("src",url);
+             $("#img").attr("src",url);
             $("#url_text").text("因为是直接上传的图片，可以直接访问的路径：\n"+url);
         });
     });

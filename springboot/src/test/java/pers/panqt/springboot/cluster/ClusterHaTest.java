@@ -13,18 +13,22 @@ import pers.panqt.springboot.modules.mybatis.FastdfsFileMapper;
 import pers.panqt.springboot.modules.mybatis.UserMapper;
 import pers.panqt.springboot.modules.rabbitmq.RabbitmqService;
 import pers.panqt.springboot.modules.redis.RedisService;
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.JedisCluster;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**  @author panqt 2019/03/27 21:00
- *   
+ *   集群高可用测试
  */
 @Slf4j
-public class ClusterTest extends BaseTest {
+public class ClusterHaTest extends BaseTest {
     public String webServerUrl;
     @Autowired
     public void setWebServerUrl(FdfsWebServer fdfsWebServer){
@@ -40,7 +44,11 @@ public class ClusterTest extends BaseTest {
     @Autowired
     FastdfsFileMapper fastdfsFileMapper;
 
-    /** 测试 FastDFS
+    @Autowired
+    private RabbitmqService rabbitmqService;
+
+
+    /** 测试 FastDFS 下载
      */
     @Test
     public void fastdfs() {
@@ -59,6 +67,8 @@ public class ClusterTest extends BaseTest {
 
     }
 
+    /** 测试 FastDFS 上传
+     */
     @Test
     public void uploadBase64(){
         int i = 0;
@@ -77,13 +87,15 @@ public class ClusterTest extends BaseTest {
         }
     }
 
+    /** 测试 Redis
+     */
     @Test
-    public void get()throws Exception{
-        int i = 0;
+    public void testRedis()throws Exception{
+        int i = 100000;
         while (true) {
             try {
                 i++;
-                Thread.sleep(200);
+                Thread.sleep(1000);
                 redisService.setValue(i+"", i);
                 System.out.println(i+": "+redisService.getValue(i+""));
             }catch (Exception e){
@@ -92,10 +104,36 @@ public class ClusterTest extends BaseTest {
         }
     }
 
+    /** 测试 Jedis 连接 Redis
+     */
+    @Test
+    public void testJedis(){
+        Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
+        //Jedis Cluster will attempt to discover cluster nodes automatically
+        jedisClusterNodes.add(new HostAndPort("centos-100", 6379));
+        jedisClusterNodes.add(new HostAndPort("centos-101", 6379));
+        jedisClusterNodes.add(new HostAndPort("centos-102", 6379));
+        jedisClusterNodes.add(new HostAndPort("centos-103", 6379));
+        jedisClusterNodes.add(new HostAndPort("centos-100", 6380));
+        jedisClusterNodes.add(new HostAndPort("centos-102", 6380));
+        JedisCluster jc = new JedisCluster(jedisClusterNodes);
 
-    @Autowired
-    private RabbitmqService rabbitmqService;
+        int i = 100000;
+        while (true) {
+            try {
+                i++;
+                Thread.sleep(200);
+                jc.set(i+"", i+"");
+                System.out.println(i+": "+jc.get(i+""));
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
+    /** 测试 Rabbitmq
+     */
+    @Test
     public void sendTotopic() throws Exception{
         int i = 0;
         while (true){
@@ -110,6 +148,8 @@ public class ClusterTest extends BaseTest {
     }
 
 
+    /** 测试 ElasticSearch 储存
+     */
     @Autowired
     TxtElasticRepository txtElasticRepository;
     @Test
@@ -153,6 +193,8 @@ public class ClusterTest extends BaseTest {
         }
     }
 
+    /** 测试 ElasticSearch 查找
+     */
     @Test
     public  void esFind(){
         try {
@@ -169,9 +211,10 @@ public class ClusterTest extends BaseTest {
 
     }
 
+    /** 测试 mysql insert
+     */
     @Autowired
     UserMapper userMapper;
-
     @Test
     public void mysqlinsert()throws Exception{
         int i = 0;
@@ -198,6 +241,8 @@ public class ClusterTest extends BaseTest {
         }
     }
 
+    /** 测试 mysql Select
+     */
     @Test
     public void mysqlSelect()throws Exception{
         while (true){
