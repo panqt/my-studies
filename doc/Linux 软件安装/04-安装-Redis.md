@@ -41,7 +41,7 @@ port 6379
 daemonize yes #守护进程，后台启动
 pidfile /var/run/redis_6379.pid
 #requirepass 123456 #密码，集群不能设密码
-bind 192.168.200.100 127.0.0.1  #绑定本机ip，被其他主机通过这个ip访问 127.0.0.1一定要放最后！！！！！
+bind 192.168.200.100   #绑定本机ip，不要使用 127.0.0.1
 ```
 [redis bind连不上的坑](https://www.cnblogs.com/suiyueqiannian/p/7808190.html)
 

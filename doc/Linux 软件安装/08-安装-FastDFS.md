@@ -8,13 +8,13 @@ GitHub地址：https://github.com/happyfish100/FastDFS
 
 防火墙
 
-```$ firewall-cmd --zone=public --add-port=8888/tcp --permanent```
+storage http访问端口：```$ firewall-cmd --zone=public --add-port=8888/tcp --permanent```
 
-```$ firewall-cmd --zone=public --add-port=8080/tcp --permanent```
+tracker http访问端口：```$ firewall-cmd --zone=public --add-port=8080/tcp --permanent```
 
-```$ firewall-cmd --zone=public --add-port=22122/tcp --permanent```
+tracker tcp访问端口：```$ firewall-cmd --zone=public --add-port=22122/tcp --permanent```
 
-```$ firewall-cmd --zone=public --add-port=23000/tcp --permanent```
+storage 集群通信端口：```$ firewall-cmd --zone=public --add-port=23000/tcp --permanent```
 
 ```$ firewall-cmd --reload```
 

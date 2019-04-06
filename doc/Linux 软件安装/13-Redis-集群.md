@@ -39,7 +39,7 @@ root 10680 1 0 07:19 ? 00:00:01 /usr/java/redis/bin/redis-server 0.0.0.0:6380 [c
 
 ```yum -y install ruby rubygems```
 
-```gem install redis```
+```gem install redis --version 4.0.11``` redis版本号
 
 ```
 [root@centos-101 init.d]# gem install redis
@@ -59,7 +59,7 @@ $ rvm list known
 $ rvm install 2.4.1
 ```
 
-```gem install redis```
+```gem install redis --version 4.0.11```
 
 ##### 4、创建集群
 

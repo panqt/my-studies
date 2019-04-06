@@ -175,7 +175,8 @@ store_path0=/home/fastdfs/fdfs_storage
     proxy_cache_path /home/fastdfs/cache/nginx/proxy_cache levels=1:2 
     keys_zone=http-cache:200m max_size=1g inactive=30d;
     proxy_temp_path /home/fastdfs/cache/nginx/proxy_cache/tmp;
-    #group1的服务设置  
+    
+    #group1的负载均衡
     upstream fdfs_group1 {  
          server centos-100:8888 weight=1 max_fails=2 fail_timeout=30s;  
          server centos-101:8888 weight=1 max_fails=2 fail_timeout=30s;  
@@ -230,7 +231,7 @@ store_path0=/home/fastdfs/fdfs_storage
         }
     }
     
-    #访问本地storage
+    #对访问本地storage提供支持
 	server {
         listen       8888;
         server_name  localhost2;

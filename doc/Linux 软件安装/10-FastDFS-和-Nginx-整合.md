@@ -1,4 +1,7 @@
+Fastdfs 的 storage 已经去掉了 http 访问，要访问storage需要 nginx 的支持，nginx的作用也就仅仅如此
+
 ##### 1、安装 FastDFS
+
 [Centos 7 安装 FastDFS](08-安装-FastDFS.md)
 
 ##### 2、配置 fastdfs-nginx-module

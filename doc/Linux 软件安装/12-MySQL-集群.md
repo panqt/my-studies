@@ -186,7 +186,7 @@ log-slave-updates=on #同步数据也写日志，让从机也能继续同步实�
 
 
 
-##### 5、读写分离
+##### 4、读写分离
 
 [MyCAT](https://www.biaodianfu.com/mycat.html)
 ```$ cd /usr/java```
@@ -279,7 +279,7 @@ switchType="3" 默认值，自动切换 心跳语句为 show status like 'wsrep%
 
 
 
-##### 6、Mycat+keepalived高可用，
+##### 5、Mycat+keepalived高可用，
 参考：[Nginx+Keepalived整合](17-Nginx+Keepalived-实现主备切换.md)
 
 ```$ vi /etc/keepalived/check_mycat_alive.sh```
