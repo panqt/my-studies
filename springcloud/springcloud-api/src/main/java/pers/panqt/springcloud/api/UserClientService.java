@@ -10,7 +10,6 @@ import pers.panqt.springcloud.entities.User;
 /**  @author panqt 2019/04/07 18:57
  *   
  */
-@Component
 @FeignClient("springcloud-provider")
 public interface UserClientService {
     @GetMapping("user/get/{userid}")
