@@ -25,10 +25,12 @@ public class UserController {
         return userService.add(user);
     }
 
-    @GetMapping("user/get")
-    public User get(@RequestParam int userid){
+    @GetMapping("user/get/{userid}")
+    public User get(@PathVariable("userid") int userid){
         log.debug("provider：[{}]", userid);
-        return userService.get(userid);
+        User user = userService.get(userid);
+        user.setUserName(user.getUserName()+"-provider8001");
+        return user;
     }
 
 

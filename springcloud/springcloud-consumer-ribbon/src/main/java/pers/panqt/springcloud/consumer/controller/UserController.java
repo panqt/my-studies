@@ -30,10 +30,10 @@ public class UserController {
         return rest;
     }
 
-    @GetMapping("comsumer/user/get")
-    public User get(@RequestParam int userid){
+    @GetMapping("comsumer/user/get/{userid}")
+    public User get(@PathVariable("userid") int userid){
         log.debug("comsumer:[{}]", userid);
-        User user = restTemplate.getForObject(REST_URL_PREFIX +"user/get?userid="+userid, User.class);
+        User user = restTemplate.getForObject(REST_URL_PREFIX +"user/get/"+userid, User.class);
 
         return user;
     }
