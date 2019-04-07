@@ -17,7 +17,8 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private static final String ADDR = "http://127.0.0.1:90/";
+    //private static final String REST_URL_PREFIX = "http://127.0.0.1:8000/";
+    private static final String REST_URL_PREFIX = "http://springcloud-provider/";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -25,14 +26,14 @@ public class UserController {
     @PostMapping("comsumer/user/add")
     public int add( @RequestBody User user){
         log.debug("provider：[{}]", user);
-        int rest = restTemplate.postForObject(ADDR+"/user/add",user, Integer.class);
+        int rest = restTemplate.postForObject(REST_URL_PREFIX +"user/add",user, Integer.class);
         return rest;
     }
 
     @GetMapping("comsumer/user/get")
     public User get(@RequestParam int userid){
         log.debug("comsumer:[{}]", userid);
-        User user = restTemplate.getForObject(ADDR+"user/get?userid="+userid, User.class);
+        User user = restTemplate.getForObject(REST_URL_PREFIX +"user/get?userid="+userid, User.class);
 
         return user;
     }
@@ -40,7 +41,7 @@ public class UserController {
     @GetMapping("comsumer/user/get-list")
     public List<User> getList(@RequestBody User user)throws Exception{
             log.debug("comsumer:[{}]", user);
-        List users = restTemplate.getForObject(ADDR+"user/get-list"+formatParam(user), List.class);
+        List users = restTemplate.getForObject(REST_URL_PREFIX +"user/get-list"+formatParam(user), List.class);
         return users;
     }
 

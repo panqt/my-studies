@@ -16,8 +16,13 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>springcloud-api</module>
-        <module>springcloud-provider</module>
-        <module>springcloud-consumer</module>
+		<module>springcloud-consumer</module>
+        <module>springcloud-provider-8000</module>
+		<module>springcloud-provider-8001</module>
+		<module>springcloud-provider-8002</module>
+		<module>springcloud-eureka-9000</module>
+		<module>springcloud-eureka-9001</module>
+		<module>springcloud-eureka-9002</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -26,6 +31,8 @@
         <springcloud-api.version>1.0-SNAPSHOT</springcloud-api.version>
         <springcloud-provider.version>1.0-SNAPSHOT</springcloud-provider.version>
         <springcloud-consumer.version>1.0-SNAPSHOT</springcloud-consumer.version>
+
+        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -38,4 +45,25 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <finalName>springcloud</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <!--<version>3.1.0</version>-->
+                <configuration>
+                    <delimiters>
+                        <delimiter>${*}</delimiter>
+                    </delimiters><!--替换配置文件-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
