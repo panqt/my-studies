@@ -24,6 +24,7 @@
 		<module>springcloud-eureka-9000</module>
 		<module>springcloud-eureka-9001</module>
 		<module>springcloud-eureka-9002</module>
+        <module>springcloud-hystrix-dashboard</module>
     </modules>
     <packaging>pom</packaging>
 
