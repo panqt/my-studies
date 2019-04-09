@@ -21,12 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("user/add")
-    public int add( @RequestBody User user){
-        log.debug("provider：[{}]", user);
-        return userService.add(user);
-    }
-
     @GetMapping("user/get/{userid}")
     @HystrixCommand(fallbackMethod = "hystrixBreaker")
     public User get(@PathVariable("userid") int userid){
@@ -44,23 +38,5 @@ public class UserController {
      *  客户端服务降级：{@link UserFallbackFactory}{@link UserClientService}*/
     public User hystrixBreaker(@PathVariable("userid") int userid){
         return new User().setUserName("调用失败了,服务熔断-provider8002");
-    }
-
-
-    @GetMapping("user/get-list")
-    public List<User> getList( User user){
-        log.debug("provider：[{}]", user);
-        return userService.list(user);
-    }
-
-
-    @Autowired
-    DiscoveryClient discoveryClient;
-
-    @GetMapping("discovery/get")
-    public List get(){
-
-        //return discoveryClient.getServices();
-        return discoveryClient.getInstances("springcloud-provider");
     }
 }

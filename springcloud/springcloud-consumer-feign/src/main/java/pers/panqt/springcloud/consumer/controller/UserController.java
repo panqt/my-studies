@@ -25,6 +25,7 @@ public class UserController {
     @GetMapping("comsumer/user/get/{userid}")
     public User add( @PathVariable("userid") int userid){
         log.debug("provider：[{}]", userid);
-        return userClientService.get(userid);
+        User user = userClientService.get(userid);
+        return user.setUserName(user.getUserName()+" feign");
     }
 }
