@@ -2,6 +2,7 @@ package pers.panqt.springcloud.consumer.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import pers.panqt.springcloud.api.UserClientService;
@@ -15,6 +16,7 @@ import java.util.List;
  *   
  */
 @Slf4j
+@RefreshScope
 @RestController
 public class UserController {
 

@@ -1,7 +1,9 @@
 package pers.panqt.springcloudmessagebus.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.test.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,7 @@ import pers.panqt.springcloudmessagebus.service.RabbitmqService;
  *   
  */
 @Slf4j
-//@RefreshScope
+@RefreshScope
 @RestController
 public class TestController {
 
@@ -24,5 +26,14 @@ public class TestController {
     public ResponseEntity getOne(@PathVariable("id") String id){
         rabbitmqService.sendToDirect(id);
         return ResponseEntity.ok("OK");
+    }
+
+
+    @Value("${test.from}")
+    String testFrom;
+
+    @GetMapping("testFrom")
+    public ResponseEntity testFrom(){
+        return ResponseEntity.ok(testFrom);
     }
 }
