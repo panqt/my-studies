@@ -2,6 +2,7 @@ package pers.panqt.springcloud.consumer.config;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.RoundRobinRule;
 import com.netflix.loadbalancer.WeightedResponseTimeRule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -26,6 +27,6 @@ public class Config {
     @Bean
     public IRule iRule(){
         //ribbon 负载均衡算法
-        return new WeightedResponseTimeRule();
+        return new RoundRobinRule();
     }
 }
