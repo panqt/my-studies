@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>pes.panqt</groupId>
+    <groupId>pers.panqt</groupId>
     <artifactId>springcloud-provider-8001</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springcloud-provider-8001</name>

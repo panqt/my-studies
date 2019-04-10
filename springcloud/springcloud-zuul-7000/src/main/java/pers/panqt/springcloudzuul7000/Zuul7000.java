@@ -2,6 +2,7 @@ package pers.panqt.springcloudzuul7000;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RoundRobinRule;
+import com.netflix.loadbalancer.WeightedResponseTimeRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -19,7 +20,7 @@ public class Zuul7000 {
 
     @Bean
     public IRule iRule(){
-        return new RoundRobinRule();
+        return new WeightedResponseTimeRule();
     }
 
     //@Bean

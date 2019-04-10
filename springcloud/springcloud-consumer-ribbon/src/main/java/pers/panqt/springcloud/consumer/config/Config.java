@@ -27,6 +27,6 @@ public class Config {
     @Bean
     public IRule iRule(){
         //ribbon 负载均衡算法
-        return new RoundRobinRule();
+        return new WeightedResponseTimeRule();
     }
 }

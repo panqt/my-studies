@@ -53,13 +53,13 @@ public class AccessFilter extends ZuulFilter {
 
         Object token = request.getParameter("accessToken");
         if(token == null){
-            log.info("accessToken is null");
+            log.error("accessToken is null");
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseBody("{\"code\":\"999\",\"data\":\"accessToken is null\"}");
             response.setContentType("application/json;charset=UTF-8");
             requestContext.setResponse(response);
         }
-        log.info("token:{}",token);
+        log.debug("token:{}",token);
         return null;
     }
 }

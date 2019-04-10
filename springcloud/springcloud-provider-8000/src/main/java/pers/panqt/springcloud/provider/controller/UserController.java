@@ -39,6 +39,7 @@ public class UserController {
     /** 这是服务端的熔断 ，
      *  客户端服务降级：{@link UserFallbackFactory}{@link UserClientService}*/
     public User hystrixBreaker(@PathVariable("userid") int userid){
+        log.error("Circuit - provider8000");
         return new User().setUserName("调用失败了,服务熔断-provider8000");
     }
 }

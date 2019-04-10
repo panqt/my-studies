@@ -28,7 +28,6 @@
         <module>springcloud-hystrix-dashboard</module>
         <module>springcloud-turbine</module>
         <module>springcloud-zuul-7000</module>
-        <module>springcloud-message-bus</module>
         <module>springcloud-config-server</module>
     </modules>
 
@@ -73,6 +72,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <!--<version>3.1.0</version>-->
                 <configuration>
+                    <skip>true</skip>
                     <delimiters>
                         <delimiter>${*}</delimiter>
                     </delimiters><!--替换配置文件-->

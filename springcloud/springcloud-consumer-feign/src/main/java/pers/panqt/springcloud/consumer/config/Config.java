@@ -19,7 +19,7 @@ public class Config {
     public IRule iRule(){
         //ribbon 负载均衡算法
         //feign 封装了ribbon,童谣使用ribbon的负载均衡算法
-        return new RoundRobinRule();
+        return new WeightedResponseTimeRule();
     }
 
 
