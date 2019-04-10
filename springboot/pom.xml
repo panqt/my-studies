@@ -165,6 +165,15 @@
             <version>1.16.20</version>
             <scope>provided</scope>
         </dependency>
+
+
+        <!--谷歌验证码-->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
     </dependencies>
 
 

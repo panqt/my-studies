@@ -30,7 +30,9 @@
         <div class="content">
             <form id="from">
                 账户：<input name="account" type="text" value="account"><br>
-                密码：<input name="password" type="password" value="password">
+                密码：<input name="password" type="password" value="password"><br>
+                验证码：<input name="captcha" type="text" value="">
+                <img th:src="${captcha}" id="captcha">
                 <input type="button" id="login" value="login"/>
             </form>
         </div>

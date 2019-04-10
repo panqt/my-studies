@@ -38,6 +38,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(sessionInterceptor).addPathPatterns("/**").excludePathPatterns(
                 "/",
                 "/auth",
+                "/captcha",
                 "/css/**",
                 "/js/**",
                 "/img/**",
@@ -57,6 +58,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(sessionInterceptor2).addPathPatterns("/**").excludePathPatterns(
                 "/",
                 "/auth",
+                "/captcha",
                 "/css/**",
                 "/js/**",
                 "/img/**",

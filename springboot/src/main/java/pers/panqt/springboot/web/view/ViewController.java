@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import pers.panqt.springboot.entry.ResultVo;
+import pers.panqt.springboot.modules.login.CaptchaService;
 import pers.panqt.springboot.modules.redis.RedisService;
 import pers.panqt.springboot.web.exception.MyExceptionHandler;
 import pers.panqt.springboot.web.interceptor.SessionInterceptor;
@@ -61,8 +62,14 @@ public class ViewController {
     public String ajax(){
         return "modules/ajax";
     }
+
+
+    @Autowired
+    CaptchaService captchaService;
+
     @GetMapping("modules/login")
-    public String login(HttpSession session){
+    public String login(HttpServletRequest request) throws Exception {
+        request.setAttribute("captcha", captchaService.createCaptcha(request));
         return "modules/login";
     }
 }
